@@ -1,0 +1,22 @@
+﻿<Window x:Class="TradingCsvAnalyser.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TradingCsvAnalyser"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="200" Width="300">
+    <Grid>
+        <ToolBar VerticalAlignment="Top" Background="Brown">
+            <Button Background="Gray">
+                X
+            </Button>
+        </ToolBar>
+        <Button Name="FileDialogButton" Click="FileDialog_OnClick"
+                Height="25" Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                Margin="0,0,200,0">
+            Look for File
+        </Button>
+        <Button VerticalAlignment="Bottom" Name="SubmitButton" Height="25px" Width="100px" Click="SubmitButton_OnClick" Background="Aqua">Import Csv</Button>
+    </Grid>
+</Window>
