@@ -29,9 +29,12 @@ namespace TradingCsvAnalyser
 
             Configuration = builder.Build();
 
+            
             var serviceCollection = new ServiceCollection();
+            serviceCollection.AddTransient(typeof(Configuration), _ => Configuration);
+            
             serviceCollection.ConfigureServices();
-
+            
             ServiceProvider = serviceCollection.BuildServiceProvider();
 
             ServiceProvider.GetRequiredService<MainWindow>();
