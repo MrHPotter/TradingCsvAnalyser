@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CsvHelper;
 using Microsoft.Win32;
+using TradingCsvAnalyser.DataProviders;
 using TradingCsvAnalyser.Models;
 
 namespace TradingCsvAnalyser
@@ -23,11 +24,13 @@ namespace TradingCsvAnalyser
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ImportWindow : Window
     {
         private IEnumerable<PriceEntry>? _currentPriceEntries;
-        public MainWindow()
+        private IUnitOfWork _data;
+        public ImportWindow(IUnitOfWork data)
         {
+            _data = data;
             InitializeComponent();
         }
 
@@ -35,6 +38,7 @@ namespace TradingCsvAnalyser
         {
             if (_currentPriceEntries?.Any() ?? false)
             {
+                _data.PriceEntryRepository.AddNewEntries(_currentPriceEntries);
                 //Import to Database
             }
         }

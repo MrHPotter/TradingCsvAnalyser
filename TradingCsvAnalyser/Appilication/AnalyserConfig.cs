@@ -16,7 +16,7 @@ public class AnalyserConfig : IAnalyserConfig
 
     public string ConnectionString => _configuration["Appsettings:ConnectionString"];
 
-    public DbProvider DbProvider => Enum.Parse<DbProvider>(_configuration["DbType"]);
+    public DbProvider DbProvider => Enum.Parse<DbProvider>(_configuration["Appsettings:DbType"], true);
 
     public bool UseLazyLoading => Boolean.Parse(_configuration["Appsettings:UseEfCoreLazyLoading"]);
     
