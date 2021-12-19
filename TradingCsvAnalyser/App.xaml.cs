@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +26,7 @@ namespace TradingCsvAnalyser
 
         public IConfiguration Configuration { get; private set; }
 
+        
         protected override void OnStartup(StartupEventArgs e)
         {
             var builder = new ConfigurationBuilder()
@@ -40,10 +42,14 @@ namespace TradingCsvAnalyser
             
             ServiceProvider = serviceCollection.BuildServiceProvider();
             
-           
-            
             ServiceProvider.GetRequiredService<OverView>().Show();
             
+        }
+
+        private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show("An unhandled Exception just occured:"+ e.Exception.Message, "Error");
+            e.Handled = true;
         }
     }
 }

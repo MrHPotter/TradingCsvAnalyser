@@ -27,16 +27,13 @@ public class PriceEntry
 
     public PriceEntry(PriceDownload input, string symbol)
     {
-        DateAndTime = input.Date.ToDateTime(new TimeOnly(0,0,0));
+        DateAndTime = input.Date;
         Close = input.Price;
         Open = input.Open;
         High = input.High;
         Low = input.Low;
         Symbol = symbol;
     }
-    
-    public PriceEntry(PriceDownloadWithSymbol input) : this(input,input.Symbol)
-    {}
 
     public DateTimeOffset DateAndTime { get; set; }
     public decimal Open { get; set; }

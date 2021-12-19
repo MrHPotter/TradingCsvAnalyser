@@ -4,7 +4,7 @@ namespace TradingCsvAnalyser.Models.SourceModels;
 
 public class PriceDownload
 {
-    public DateOnly Date { get; set; }
+    public DateTimeOffset Date { get; set; }
     public decimal Price { get; set; }
     public decimal Open { get; set; }
     public decimal High { get; set; }

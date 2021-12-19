@@ -20,17 +20,14 @@
                  Name="SymbolTextBox" >
             
         </TextBox>
-        
+        <Label Name="StatusLabel" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+               Margin="0,0,0,30" Width="200" HorizontalContentAlignment="Center" Foreground="Crimson"></Label>
         <Button Name="FileDialogButton" Click="FileDialog_OnClick"
                 Height="25" Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Center"
                 Margin="0,0,200,0">
             Look for File
         </Button>
-        <Button VerticalAlignment="Bottom" Name="SubmitButtonTv" Height="25px" Width="100px" Click="SubmitButtonTv_OnClick" Background="Aqua">Import TV Csv</Button>
-        <Button  Margin ="0,0,51,25" VerticalAlignment="Bottom" 
-                 Name="Iv" Height="25px" Width="150px" Background="Aqua"
-                 Click="SubmitButtonIv_OnClick">
-            Import Investing.com Csv
-        </Button>
+        <Button VerticalAlignment="Bottom" Name="SubmitButtonTv" Height="25px" Width="100px" Click="SubmitButton_OnClick" Background="Aqua">Import CSV</Button>
+        
     </Grid>
 </Window>
