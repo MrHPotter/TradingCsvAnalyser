@@ -14,7 +14,7 @@ namespace TradingCsvAnalyser.Windows
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class ImportWindow : Window
+    public partial class ImportWindow : Window, IDisposable
     {
         private IEnumerable<PriceEntry>? _currentPriceEntries;
         private readonly IUnitOfWork _data;
@@ -32,7 +32,7 @@ namespace TradingCsvAnalyser.Windows
                 //Import to Database
             }
         }
-
+        
         private void FileDialog_OnClick(object sender, RoutedEventArgs e)
         {
             
@@ -51,6 +51,10 @@ namespace TradingCsvAnalyser.Windows
                 }
                 
             }
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

@@ -39,7 +39,7 @@ namespace TradingCsvAnalyser
             
             ServiceProvider = serviceCollection.BuildServiceProvider();
 
-            ServiceProvider.GetRequiredService<ImportWindow>().Show();
+            ServiceProvider.GetRequiredService<OverView>().Show();
             
         }
     }

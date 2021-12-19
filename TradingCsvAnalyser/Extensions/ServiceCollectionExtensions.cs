@@ -24,6 +24,7 @@ public static class ServiceCollectionExtensions
         services.AddTransient<IUnitOfWork, UnitOfWork>();
         services.AddTransient<IReader, CsvReader>();
         services.AddTransient(typeof(ImportWindow));
+        services.AddTransient(typeof(OverView));
     }
 
     /// <summary>
