@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TradingCsvAnalyser.Extensions;
 using TradingCsvAnalyser.Models;
 using TradingCsvAnalyser.Models.Database;
 
@@ -14,7 +15,7 @@ public class PriceEntryRepository : IPriceEntryRepository
         _context = context;
     }
 
-    public IEnumerable<PriceEntry> GetAllEntries()
+    public IQueryable<PriceEntry> GetAllEntries()
     {
         return _context.PriceEntries;
     }
@@ -24,18 +25,18 @@ public class PriceEntryRepository : IPriceEntryRepository
         _context.PriceEntries.AddRange(entries.Where(i => !_context.PriceEntries.Contains(i)));
     }
 
-    public IEnumerable<PriceEntry> GetEntriesForSymbol(string symbol)
+    public IQueryable<PriceEntry> GetEntriesForSymbol(string symbol)
     {
         return _context.PriceEntries.Where(i => i.Symbol.ToLower() == symbol.ToLower());
     }
 
-    public IEnumerable<PriceEntry> GetEntriesInTimeRange(DateTime start, DateTime end)
+    public IQueryable<PriceEntry> GetEntriesInTimeRange(DateTime start, DateTime end)
     {
-        throw new NotImplementedException();
+        return _context.PriceEntries.FilterForTimeRange(start.Date, end.Date);
     }
 
-    public IEnumerable<PriceEntry> GetTimeEntriesForDay(DayOfWeek dayOfWeek)
+    public IQueryable<PriceEntry> GetTimeEntriesForDay(DayOfWeek dayOfWeek)
     {
-        throw new NotImplementedException();
+        return _context.PriceEntries.FilterForDayOfWeek(dayOfWeek);
     }
 }
