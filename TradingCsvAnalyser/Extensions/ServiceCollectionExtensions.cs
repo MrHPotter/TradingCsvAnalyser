@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using TradingCsvAnalyser.Appilication;
 using TradingCsvAnalyser.DataProviders;
 using TradingCsvAnalyser.Models.Database;
+using TradingCsvAnalyser.Windows;
 
 namespace TradingCsvAnalyser.Extensions;
 

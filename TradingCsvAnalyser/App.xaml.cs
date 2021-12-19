@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TradingCsvAnalyser.Appilication;
 using TradingCsvAnalyser.Extensions;
 using TradingCsvAnalyser.Models.Database;
+using TradingCsvAnalyser.Windows;
 
 namespace TradingCsvAnalyser
 {
@@ -38,7 +39,8 @@ namespace TradingCsvAnalyser
             
             ServiceProvider = serviceCollection.BuildServiceProvider();
 
-            ServiceProvider.GetRequiredService<ImportWindow>();
+            ServiceProvider.GetRequiredService<ImportWindow>().Show();
+            
         }
     }
 }
