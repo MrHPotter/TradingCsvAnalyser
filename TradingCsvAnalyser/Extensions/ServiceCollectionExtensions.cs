@@ -5,7 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TradingCsvAnalyser.Appilication;
+using TradingCsvAnalyser.DataProviders;
 using TradingCsvAnalyser.Models.Database;
+using TradingCsvAnalyser.Windows;
 
 namespace TradingCsvAnalyser.Extensions;
 
@@ -19,8 +21,9 @@ public static class ServiceCollectionExtensions
     
     public static void ConfigureServices(this IServiceCollection services)
     {
-        services.AddTransient(typeof(MainWindow));
+        services.AddTransient<IUnitOfWork, UnitOfWork>();
         services.AddTransient<IReader, CsvReader>();
+        services.AddTransient(typeof(ImportWindow));
     }
 
     /// <summary>
