@@ -1,12 +1,12 @@
 ﻿using TradingCsvAnalyser.DataProviders;
-using TradingCsvAnalyser.DataProviders.AnalysisResults;
 using TradingCsvAnalyser.Extensions;
 using TradingCsvAnalyser.Extensions.DataModels;
+using TradingCsvAnalyser.Models.AnalysisResults;
 using TradingCsvAnalyser.Models.Enums;
 
 namespace TradingCsvAnalyser.Managers;
 
-public class AggregationManager
+public class AggregationManager : IAggregationManager
 {
     private readonly IUnitOfWork _data;
 

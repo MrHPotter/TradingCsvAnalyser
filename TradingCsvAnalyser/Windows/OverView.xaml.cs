@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using Microsoft.Extensions.DependencyInjection;
 using TradingCsvAnalyser.DataProviders;
 using TradingCsvAnalyser.Extensions;
+using TradingCsvAnalyser.Managers;
+using TradingCsvAnalyser.Models.AnalysisResults;
 using TradingCsvAnalyser.Models.Enums;
 
 namespace TradingCsvAnalyser.Windows;
@@ -13,10 +18,18 @@ public partial class OverView : Window
     private readonly IServiceProvider _serviceProvider;
     private string? CandleRangeSelection;
     private string? SelectedSymbol;
+    private readonly ObservableCollection<DayOfWeekData> _dayOfWeekData;
     public OverView(IServiceProvider serviceProvider)
     {
+        _dayOfWeekData = new();
+        
         _serviceProvider = serviceProvider;
         InitializeComponent();
+        var template = new DataTemplate(typeof(DayOfWeekData));
+        MainDataGrid.AutoGenerateColumns = true;
+        MainDataGrid.ItemsSource = _dayOfWeekData;
+        MainDataGrid.ItemTemplate = new DataTemplate(typeof(DayOfWeekData));
+        MainDataGrid.UpdateLayout();
     }
 
     public void OpenImportWindow(object sender, RoutedEventArgs e)
@@ -57,5 +70,12 @@ public partial class OverView : Window
             SymbolSelectorBox.Items.AddNew(symbol);
         }
     }
-    
+
+    private void AnalyseButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var aggregator = _serviceProvider.GetRequiredService<IAggregationManager>();
+        if(Enum.TryParse(CandleRangeSelection,out CandleRange selection))
+            _dayOfWeekData.Add(aggregator.GetAverageRangePerDay(selection));
+
+    }
 }

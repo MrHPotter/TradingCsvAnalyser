@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Security.Cryptography;
 
-namespace TradingCsvAnalyser.DataProviders.AnalysisResults;
+namespace TradingCsvAnalyser.Models.AnalysisResults;
 
 public class DayOfWeekData
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using TradingCsvAnalyser.DataProviders.AnalysisResults;
 using TradingCsvAnalyser.Models;
+using TradingCsvAnalyser.Models.AnalysisResults;
 
 namespace TradingCsvAnalyser.Extensions.DataModels;
 
@@ -26,7 +26,7 @@ public static class PriceEntryExtensions
     public static DayOfWeekData GetAveragePerDay(this IQueryable<PriceEntry> entries, Func<PriceEntry, decimal> selector)
     {
         DayOfWeekData data = new();
-        foreach (var day in entries.GroupBy(e => e.Day))
+        foreach (var day in entries.AsEnumerable().GroupBy(e => e.Day))
         {
             data.AddDay(day.Key, day.Average(selector));
         }
