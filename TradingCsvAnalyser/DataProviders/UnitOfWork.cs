@@ -8,9 +8,9 @@ public class UnitOfWork: IUnitOfWork
 {
     private readonly AnalyserContext _context;
     public IPriceEntryRepository PriceEntryRepository { get; }
-    public UnitOfWork(IDbContextFactory<AnalyserContext> contextFactory)
+    public UnitOfWork(AnalyserContext context)
     {
-        _context = contextFactory.CreateDbContext();
+        _context = context;
         PriceEntryRepository = new PriceEntryRepository(_context);
     }
 

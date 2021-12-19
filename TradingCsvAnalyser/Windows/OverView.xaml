@@ -5,8 +5,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:TradingCsvAnalyser.Windows"
         mc:Ignorable="d"
-        Title="OverView" Height="450" Width="800">
+        Title="OverView" Height="800" Width="800">
     <Grid>
-        <Button Click="OpenImportWindow" Width="100" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top">Add new Data</Button>
+        <ComboBox Name="SymbolSelectorBox" 
+                  SelectionChanged="SymbolSelectorBox_OnSelectionChanged"
+                  DropDownOpened="SymbolSelectorBox_OnDropDownOpened"
+                  Width="150" Height="25" VerticalAlignment="Top"
+                  HorizontalAlignment="Left">
+        </ComboBox>
+        <ComboBox SelectionChanged="SelectorBox_OnSelectionChanged" 
+                  DropDownOpened="SelectorBox_OnDropDownOpened" Name="SelectorBox" 
+                  Width="150" Height="25" VerticalAlignment="Top">
+        </ComboBox>
+        <Button Click="OpenImportWindow" Width="100" Height="50"
+                HorizontalAlignment="Right" VerticalAlignment="Top">
+            Add new Data
+        </Button>
     </Grid>
 </Window>

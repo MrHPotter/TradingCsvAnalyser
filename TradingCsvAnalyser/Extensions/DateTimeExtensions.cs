@@ -27,4 +27,13 @@ public static class DateTimeExtensions
         var monday = date.MostRecentSunday().AddDays(1).Date;
         return new DateRange(monday, monday.AddDays(5));
     }
+
+    public static DateOnly DateOnly(this DateTime date)
+    {
+        return new DateOnly(date.Year, date.Month, date.Day);
+    }
+    public static DateOnly DateOnly(this DateTimeOffset date)
+    {
+        return new DateOnly(date.Year, date.Month, date.Day);
+    }
 }

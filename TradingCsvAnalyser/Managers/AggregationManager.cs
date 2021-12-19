@@ -1,6 +1,7 @@
 ﻿using TradingCsvAnalyser.DataProviders;
 using TradingCsvAnalyser.DataProviders.AnalysisResults;
 using TradingCsvAnalyser.Extensions;
+using TradingCsvAnalyser.Extensions.DataModels;
 using TradingCsvAnalyser.Models.Enums;
 
 namespace TradingCsvAnalyser.Managers;

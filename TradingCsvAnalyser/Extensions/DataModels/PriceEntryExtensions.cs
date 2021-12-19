@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Extensions.Configuration;
 using TradingCsvAnalyser.DataProviders.AnalysisResults;
 using TradingCsvAnalyser.Models;
-namespace TradingCsvAnalyser.Extensions;
+
+namespace TradingCsvAnalyser.Extensions.DataModels;
 
 public static class PriceEntryExtensions
 {

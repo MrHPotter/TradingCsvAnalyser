@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TradingCsvAnalyser.Appilication;
@@ -34,11 +35,13 @@ namespace TradingCsvAnalyser
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddTransient(typeof(Configuration), _ => Configuration);
-            serviceCollection.AddDbContextFactory<AnalyserContext>(new AnalyserConfig(Configuration));
+            serviceCollection.AddDbContext<AnalyserContext>(ServiceLifetime.Transient);
             serviceCollection.ConfigureServices();
             
             ServiceProvider = serviceCollection.BuildServiceProvider();
-
+            
+           
+            
             ServiceProvider.GetRequiredService<OverView>().Show();
             
         }

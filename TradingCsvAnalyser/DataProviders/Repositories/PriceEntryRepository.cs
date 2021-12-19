@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TradingCsvAnalyser.Extensions;
+using TradingCsvAnalyser.Extensions.DataModels;
 using TradingCsvAnalyser.Models;
 using TradingCsvAnalyser.Models.Database;
 
@@ -38,5 +39,10 @@ public class PriceEntryRepository : IPriceEntryRepository
     public IQueryable<PriceEntry> GetTimeEntriesForDay(DayOfWeek dayOfWeek)
     {
         return _context.PriceEntries.FilterForDayOfWeek(dayOfWeek);
+    }
+
+    public IEnumerable<string> GetAvailableSymbols()
+    {
+        return _context.PriceEntries.AsEnumerable().DistinctBy(e => e.Symbol).Select(p => p.Symbol);
     }
 }

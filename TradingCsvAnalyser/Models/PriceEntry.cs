@@ -1,32 +1,50 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Win32;
+using TradingCsvAnalyser.Extensions;
 using TradingCsvAnalyser.Models.Enums;
+using TradingCsvAnalyser.Models.SourceModels;
 
 
 namespace TradingCsvAnalyser.Models;
 
 public class PriceEntry
 {
+    public PriceEntry()
+    {
+        
+    }
     public PriceEntry(DateTimeOffset dateAndTime, decimal open, decimal high, 
-        decimal low, decimal close, DayOfWeek day, DateOnly date, string symbol)
+        decimal low, decimal close,  string symbol)
     {
         DateAndTime = dateAndTime;
         Open = open;
         High = high;
         Low = low;
         Close = close;
-        Day = day;
-        Date = date;
         Symbol = symbol;
     }
+
+    public PriceEntry(PriceDownload input, string symbol)
+    {
+        DateAndTime = input.Date.ToDateTime(new TimeOnly(0,0,0));
+        Close = input.Price;
+        Open = input.Open;
+        High = input.High;
+        Low = input.Low;
+        Symbol = symbol;
+    }
+    
+    public PriceEntry(PriceDownloadWithSymbol input) : this(input,input.Symbol)
+    {}
 
     public DateTimeOffset DateAndTime { get; set; }
     public decimal Open { get; set; }
     public decimal High { get; set; }
     public decimal Low { get; set; }
     public decimal Close { get; set; }
-    public DayOfWeek Day { get; set; }
-    public DateOnly Date { get; set; }
+    public DayOfWeek Day => DateAndTime.DayOfWeek;
+    public DateOnly Date => DateAndTime.DateOnly();
     public string Symbol { get; set; }
 
     public override bool Equals(object? obj)
@@ -68,4 +86,10 @@ public class PriceEntry
     private decimal OpenLowRange() => Open - Low;
     private decimal LowCloseRange() => Close - Low;
     private decimal HighCloseRange() => High - Close;
+
+    public static implicit operator PriceEntry?(PriceDownloadWithSymbol? download)
+    {
+        if (download is null) return null;
+        return new(download, download.Symbol);
+    }
 }

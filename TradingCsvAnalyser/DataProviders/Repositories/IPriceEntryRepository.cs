@@ -12,4 +12,5 @@ public interface IPriceEntryRepository
     IQueryable<PriceEntry> GetEntriesForSymbol(string symbol);
     IQueryable<PriceEntry> GetEntriesInTimeRange(DateTime start, DateTime end);
     IQueryable<PriceEntry> GetTimeEntriesForDay(DayOfWeek dayOfWeek);
+    IEnumerable<string> GetAvailableSymbols();
 }
