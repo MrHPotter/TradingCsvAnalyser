@@ -4,6 +4,14 @@ namespace TradingCsvAnalyser.Models.AnalysisResults;
 
 public class DayOfWeekData
 {
+    public DayOfWeekData(DayOfWeekData data)
+    {
+        Monday = data.Monday;
+        Tuesday = data.Tuesday;
+        Wednesday = data.Wednesday;
+        Thursday = data.Thursday;
+        Friday = data.Friday;
+    }
     public DayOfWeekData()
     {
         Monday = null;

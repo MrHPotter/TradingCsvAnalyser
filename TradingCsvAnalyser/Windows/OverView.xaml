@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:TradingCsvAnalyser.Windows"
         mc:Ignorable="d"
-        Title="OverView" Height="800" Width="800">
+        Title="OverView" Height="800" Width="1250">
     <Grid>
         <ComboBox Name="SymbolSelectorBox" 
                   SelectionChanged="SymbolSelectorBox_OnSelectionChanged"
@@ -27,7 +27,7 @@
                 Click="AnalyseButton_OnClick">
             Analyse
         </Button>
-        <DataGrid Height="200" Width="400" Margin="0,100,0,100" Name="MainDataGrid"></DataGrid>
+        <DataGrid Height="200" Width="1200" Margin="0,100,0,100" Name="MainDataGrid"></DataGrid>
     </Grid>
    
 </Window>

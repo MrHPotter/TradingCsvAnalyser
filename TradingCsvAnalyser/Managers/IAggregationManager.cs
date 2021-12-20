@@ -6,4 +6,6 @@ namespace TradingCsvAnalyser.Managers;
 public interface IAggregationManager
 {
     public DayOfWeekData GetAverageRangePerDay(CandleRange rangeType);
+    
+    public DayOfWeekData GetAverageRangePerDay(CandleRange rangeType, string symbol);
 }

@@ -18,7 +18,7 @@ public partial class OverView : Window
     private readonly IServiceProvider _serviceProvider;
     private string? CandleRangeSelection;
     private string? SelectedSymbol;
-    private readonly ObservableCollection<DayOfWeekData> _dayOfWeekData;
+    private readonly ObservableCollection<DoWOverview> _dayOfWeekData;
     public OverView(IServiceProvider serviceProvider)
     {
         _dayOfWeekData = new();
@@ -75,7 +75,15 @@ public partial class OverView : Window
     {
         var aggregator = _serviceProvider.GetRequiredService<IAggregationManager>();
         if(Enum.TryParse(CandleRangeSelection,out CandleRange selection))
-            _dayOfWeekData.Add(aggregator.GetAverageRangePerDay(selection));
+        {
+            if(String.IsNullOrWhiteSpace(SelectedSymbol))
+                _dayOfWeekData.Add(new(aggregator.GetAverageRangePerDay(selection),"All",CandleRangeSelection));
+            else
+            {
+                _dayOfWeekData.Add(new
+                    (aggregator.GetAverageRangePerDay(selection, SelectedSymbol),SelectedSymbol,CandleRangeSelection));
+            }
+        }
 
     }
 }

@@ -20,4 +20,10 @@ public class AggregationManager : IAggregationManager
         return _data.PriceEntryRepository.GetAllEntries()
             .GetAveragePerDay(i => i.Range(rangeType));
     }
+
+    public DayOfWeekData GetAverageRangePerDay(CandleRange rangeType, string symbol)
+    {
+        return _data.PriceEntryRepository.GetEntriesForSymbol(symbol)
+            .GetAveragePerDay(i => i.Range(rangeType));
+    }
 }

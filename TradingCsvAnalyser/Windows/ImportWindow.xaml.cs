@@ -82,11 +82,11 @@ namespace TradingCsvAnalyser.Windows
         private void FormatTradingViewCsv()
         {
             var file = File.ReadAllText(_filePath);
-            file = file.Replace("time", "Date");
-            file = file.Replace("open", "Open");
-            file = file.Replace("high", "High");
-            file = file.Replace("low", "Low");
-            file = file.Replace("close", "Price");
+            file = file.Replace("time", "Date", StringComparison.CurrentCultureIgnoreCase);
+            file = file.Replace("open", "Open", StringComparison.CurrentCultureIgnoreCase);
+            file = file.Replace("high", "High", StringComparison.CurrentCultureIgnoreCase);
+            file = file.Replace("low", "Low", StringComparison.CurrentCultureIgnoreCase);
+            file = file.Replace("close", "Price", StringComparison.CurrentCultureIgnoreCase);
             File.WriteAllText(_filePath,file);
         }
 
