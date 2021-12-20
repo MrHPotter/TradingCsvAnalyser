@@ -16,8 +16,8 @@ namespace TradingCsvAnalyser.Windows;
 public partial class OverView : Window
 {
     private readonly IServiceProvider _serviceProvider;
-    private string? CandleRangeSelection;
-    private string? SelectedSymbol;
+    private string? _candleRangeSelection;
+    private string? _selectedSymbol;
     private readonly ObservableCollection<DoWOverview> _dayOfWeekData;
     public OverView(IServiceProvider serviceProvider)
     {
@@ -25,7 +25,6 @@ public partial class OverView : Window
         
         _serviceProvider = serviceProvider;
         InitializeComponent();
-        var template = new DataTemplate(typeof(DayOfWeekData));
         MainDataGrid.AutoGenerateColumns = true;
         MainDataGrid.ItemsSource = _dayOfWeekData;
         MainDataGrid.ItemTemplate = new DataTemplate(typeof(DayOfWeekData));
@@ -51,14 +50,14 @@ public partial class OverView : Window
 
     private void SelectorBox_OnSelectionChanged(object sender, RoutedEventArgs e)
     {
-        CandleRangeSelection = SelectorBox.SelectedItem?.ToString();
-        Console.WriteLine($"Selected {CandleRangeSelection}");
+        _candleRangeSelection = SelectorBox.SelectedItem?.ToString();
+        Console.WriteLine($"Selected {_candleRangeSelection}");
     }
 
     private void SymbolSelectorBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        SelectedSymbol = SymbolSelectorBox.SelectedItem?.ToString();
-        Console.WriteLine($"Selected {SelectedSymbol} as Symbol");
+        _selectedSymbol = SymbolSelectorBox.SelectedItem?.ToString();
+        Console.WriteLine($"Selected {_selectedSymbol} as Symbol");
     }
 
     private void SymbolSelectorBox_OnDropDownOpened(object? sender, EventArgs e)
@@ -74,14 +73,14 @@ public partial class OverView : Window
     private void AnalyseButton_OnClick(object sender, RoutedEventArgs e)
     {
         var aggregator = _serviceProvider.GetRequiredService<IAggregationManager>();
-        if(Enum.TryParse(CandleRangeSelection,out CandleRange selection))
+        if(Enum.TryParse(_candleRangeSelection,out CandleRange selection))
         {
-            if(String.IsNullOrWhiteSpace(SelectedSymbol))
-                _dayOfWeekData.Add(new(aggregator.GetAverageRangePerDay(selection),"All",CandleRangeSelection));
+            if(String.IsNullOrWhiteSpace(_selectedSymbol))
+                _dayOfWeekData.Add(new(aggregator.GetAverageRangePerDay(selection),"All",_candleRangeSelection));
             else
             {
                 _dayOfWeekData.Add(new
-                    (aggregator.GetAverageRangePerDay(selection, SelectedSymbol),SelectedSymbol,CandleRangeSelection));
+                    (aggregator.GetAverageRangePerDay(selection, _selectedSymbol),_selectedSymbol,_candleRangeSelection));
             }
         }
 
