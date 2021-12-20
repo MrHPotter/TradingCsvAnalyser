@@ -3,7 +3,7 @@ using TradingCsvAnalyser.Models.Enums;
 
 namespace TradingCsvAnalyser.Managers;
 
-public interface IAggregationManager
+public interface IDayOfWeekDataManager
 {
     public DayOfWeekData GetAverageRangePerDay(CandleRange rangeType);
     

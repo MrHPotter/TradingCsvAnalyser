@@ -29,6 +29,7 @@ public partial class OverView : Window
         InitializeComponent();
         SetupMainDataGrid();
         SetupMethodList();
+        SetupDayFilterBox();
     }
 
     private void SetupMainDataGrid()
@@ -41,7 +42,7 @@ public partial class OverView : Window
 
     private void SetupMethodList()
     {
-        foreach (var methodName in _serviceProvider.GetRequiredService<IAggregationManager>().GetDayOfWeekMethods())
+        foreach (var methodName in _serviceProvider.GetRequiredService<IDayOfWeekDataManager>().GetDayOfWeekMethods())
         {
             if(methodName=="CallMethodByName")
                 continue;
@@ -49,6 +50,14 @@ public partial class OverView : Window
         }
     }
 
+    private void SetupDayFilterBox()
+    {
+        var values = Enum.GetValues<DayFilters>();
+        foreach (var filter in values)
+        {
+            DayFilterBox.Items.Add(filter);
+        }
+    }
     public void OpenImportWindow(object sender, RoutedEventArgs e)
     {
         ImportWindow importWindow = _serviceProvider.GetRequiredService<ImportWindow>();
@@ -90,7 +99,7 @@ public partial class OverView : Window
 
     private void AnalyseButton_OnClick(object sender, RoutedEventArgs e)
     {
-        var aggregator = _serviceProvider.GetRequiredService<IAggregationManager>();
+        var aggregator = _serviceProvider.GetRequiredService<IDayOfWeekDataManager>();
         if(Enum.TryParse(_candleRangeSelection,out CandleRange selection))
         {
             if(String.IsNullOrWhiteSpace(_selectedSymbol) || String.IsNullOrWhiteSpace(_selectedMethod))

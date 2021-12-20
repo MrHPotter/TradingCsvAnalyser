@@ -44,4 +44,9 @@ public static class PriceEntryExtensions
 
         return data;
     }
+
+    public static IQueryable<PriceEntry> FilterByDayResult(this IQueryable<PriceEntry> entries, bool upClose)
+    {
+        return entries.Where(e => e.Close > e.Open == upClose);
+    }
 }

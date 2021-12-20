@@ -7,11 +7,11 @@ using TradingCsvAnalyser.Models.Enums;
 
 namespace TradingCsvAnalyser.Managers;
 
-public class AggregationManager : IAggregationManager
+public class DayOfWeekDataManager : IDayOfWeekDataManager
 {
     private readonly IUnitOfWork _data;
 
-    public AggregationManager(IUnitOfWork data)
+    public DayOfWeekDataManager(IUnitOfWork data)
     {
         _data = data;
     }
