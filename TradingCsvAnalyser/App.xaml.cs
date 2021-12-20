@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TradingCsvAnalyser.Appilication;
 using TradingCsvAnalyser.Extensions;
+using TradingCsvAnalyser.Helpers;
 using TradingCsvAnalyser.Models.Database;
 using TradingCsvAnalyser.Windows;
 
@@ -34,14 +35,12 @@ namespace TradingCsvAnalyser
                 .AddJsonFile("appsettings.json");
 
             Configuration = builder.Build();
-
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddTransient(typeof(Configuration), _ => Configuration);
             serviceCollection.AddDbContext<AnalyserContext>(ServiceLifetime.Transient);
             serviceCollection.ConfigureServices();
-            
             ServiceProvider = serviceCollection.BuildServiceProvider();
-            
+            ConsoleHider.HideConsole();
             ServiceProvider.GetRequiredService<OverView>().Show();
             
         }
