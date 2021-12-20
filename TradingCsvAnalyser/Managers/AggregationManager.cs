@@ -1,4 +1,5 @@
-﻿using TradingCsvAnalyser.DataProviders;
+﻿using System;
+using TradingCsvAnalyser.DataProviders;
 using TradingCsvAnalyser.Extensions;
 using TradingCsvAnalyser.Extensions.DataModels;
 using TradingCsvAnalyser.Models.AnalysisResults;
@@ -31,5 +32,18 @@ public class AggregationManager : IAggregationManager
     {
         return _data.PriceEntryRepository.GetEntriesForSymbol(symbol)
             .GetSumPerDay(i => i.Range(rangeType));
+    }
+
+    public DayOfWeekData CallMethodByName(string method, CandleRange rangeType, string symbol)
+    {
+        switch (method)
+        {
+            case nameof(GetAverageRangePerDay):
+                return GetAverageRangePerDay(rangeType, symbol);
+            case nameof(GetSumRangePerDay):
+                return GetSumRangePerDay(rangeType, symbol);
+            default:
+                throw new ArgumentException($"{method} is not a valid Method");
+        }
     }
 }

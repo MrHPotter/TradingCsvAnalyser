@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TradingCsvAnalyser.DataProviders;
 using TradingCsvAnalyser.Extensions;
 using TradingCsvAnalyser.Managers;
+using TradingCsvAnalyser.Models;
 using TradingCsvAnalyser.Models.AnalysisResults;
 using TradingCsvAnalyser.Models.Enums;
 
@@ -18,6 +19,7 @@ public partial class OverView : Window
     private readonly IServiceProvider _serviceProvider;
     private string? _candleRangeSelection;
     private string? _selectedSymbol;
+    private string? _selectedMethod;
     private readonly ObservableCollection<DoWOverview> _dayOfWeekData;
     public OverView(IServiceProvider serviceProvider)
     {
@@ -25,10 +27,26 @@ public partial class OverView : Window
         
         _serviceProvider = serviceProvider;
         InitializeComponent();
+        SetupMainDataGrid();
+        SetupMethodList();
+    }
+
+    private void SetupMainDataGrid()
+    {
         MainDataGrid.AutoGenerateColumns = true;
         MainDataGrid.ItemsSource = _dayOfWeekData;
         MainDataGrid.ItemTemplate = new DataTemplate(typeof(DayOfWeekData));
         MainDataGrid.UpdateLayout();
+    }
+
+    private void SetupMethodList()
+    {
+        foreach (var methodName in _serviceProvider.GetRequiredService<IAggregationManager>().GetDayOfWeekMethods())
+        {
+            if(methodName=="CallMethodByName")
+                continue;
+            MethodSelectorBox.Items.Add(methodName);
+        }
     }
 
     public void OpenImportWindow(object sender, RoutedEventArgs e)
@@ -75,14 +93,19 @@ public partial class OverView : Window
         var aggregator = _serviceProvider.GetRequiredService<IAggregationManager>();
         if(Enum.TryParse(_candleRangeSelection,out CandleRange selection))
         {
-            if(String.IsNullOrWhiteSpace(_selectedSymbol))
+            if(String.IsNullOrWhiteSpace(_selectedSymbol) || String.IsNullOrWhiteSpace(_selectedMethod))
                 _dayOfWeekData.Add(new(aggregator.GetAverageRangePerDay(selection),"All",_candleRangeSelection));
             else
             {
                 _dayOfWeekData.Add(new
-                    (aggregator.GetAverageRangePerDay(selection, _selectedSymbol),_selectedSymbol,_candleRangeSelection));
+                    (aggregator.CallMethodByName(_selectedMethod, selection, _selectedSymbol),_selectedSymbol,_candleRangeSelection));
             }
         }
 
+    }
+
+    private void MethodSelectorBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        _selectedMethod = MethodSelectorBox.SelectedItem.ToString();
     }
 }

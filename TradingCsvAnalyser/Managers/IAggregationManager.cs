@@ -10,4 +10,6 @@ public interface IAggregationManager
     public DayOfWeekData GetAverageRangePerDay(CandleRange rangeType, string symbol);
 
     public DayOfWeekData GetSumRangePerDay(CandleRange rangeType, string symbol);
+
+    public DayOfWeekData CallMethodByName(string method, CandleRange rangeType, string symbol);
 }
