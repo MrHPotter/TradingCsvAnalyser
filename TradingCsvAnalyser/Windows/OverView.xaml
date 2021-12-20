@@ -13,6 +13,10 @@
                   Width="150" Height="25" VerticalAlignment="Top"
                   HorizontalAlignment="Left">
         </ComboBox>
+        <ComboBox Name="MethodSelectorBox"
+                  SelectionChanged="MethodSelectorBox_OnSelectionChanged"
+                  Width="150" Height="25" VerticalAlignment="Top"
+                  Margin="0,0,300,0"></ComboBox>
         <ComboBox SelectionChanged="SelectorBox_OnSelectionChanged" 
                   DropDownOpened="SelectorBox_OnDropDownOpened" Name="SelectorBox" 
                   Width="150" Height="25" VerticalAlignment="Top">
@@ -23,10 +27,17 @@
         </Button>
         <Button Width="100" Height="25"
                 HorizontalAlignment="Center" VerticalAlignment="Top"
-                Margin="0,25,0,0" Name="AnalyseButton"
+                Margin="250,0,0,0" Name="AnalyseButton"
                 Click="AnalyseButton_OnClick">
             Analyse
         </Button>
+        <Label Width="120" Height="25" VerticalAlignment="Top"
+               HorizontalAlignment="Left"
+               Margin="20,25,0,0">Symbol</Label>
+        <Label Width="120" Height="25" VerticalAlignment="Top"
+               Margin="20,25,0,0">Type of Range</Label>
+        <Label Width="120" Height="25" VerticalAlignment="Top"
+               Margin="0,25,280,0">Method</Label>
         <DataGrid Height="200" Width="1200" Margin="0,100,0,100" Name="MainDataGrid"></DataGrid>
     </Grid>
    
