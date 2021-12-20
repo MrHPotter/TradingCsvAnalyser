@@ -40,6 +40,8 @@ namespace TradingCsvAnalyser
             serviceCollection.AddDbContext<AnalyserContext>(ServiceLifetime.Transient);
             serviceCollection.ConfigureServices();
             ServiceProvider = serviceCollection.BuildServiceProvider();
+            ServiceProvider.GetRequiredService<AnalyserContext>().Database.Migrate();
+            
             ConsoleHider.HideConsole();
             ServiceProvider.GetRequiredService<OverView>().Show();
             

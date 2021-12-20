@@ -33,4 +33,15 @@ public static class PriceEntryExtensions
 
         return data;
     }
+
+    public static DayOfWeekData GetSumPerDay(this IQueryable<PriceEntry> entries, Func<PriceEntry, decimal> selector)
+    {
+        DayOfWeekData data = new();
+        foreach (var day in entries.AsEnumerable().GroupBy(e => e.Day))
+        {
+            data.AddDay(day.Key, day.Sum(selector));
+        }
+
+        return data;
+    }
 }
