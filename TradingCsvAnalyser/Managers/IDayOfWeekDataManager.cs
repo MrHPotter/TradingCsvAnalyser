@@ -1,15 +1,14 @@
 ﻿using TradingCsvAnalyser.Models.AnalysisResults;
 using TradingCsvAnalyser.Models.Enums;
+using TradingCsvAnalyser.Models.HelperModels;
 
 namespace TradingCsvAnalyser.Managers;
 
 public interface IDayOfWeekDataManager
 {
-    public DayOfWeekData GetAverageRangePerDay(CandleRange rangeType);
-    
-    public DayOfWeekData GetAverageRangePerDay(CandleRange rangeType, string symbol);
+    public DayOfWeekData GetAverageRangePerDay(DoWDefaultParameters parameters);
 
-    public DayOfWeekData GetSumRangePerDay(CandleRange rangeType, string symbol);
-
-    public DayOfWeekData CallMethodByName(string method, CandleRange rangeType, string symbol);
+    public DayOfWeekData GetSumRangePerDay(DoWDefaultParameters parameters);
+    public DayOfWeekData GetUpDayRatioPerDay(string symbol);
+    public DayOfWeekData CallMethodByName(string method, DoWDefaultParameters doWDefaultParameters);
 }

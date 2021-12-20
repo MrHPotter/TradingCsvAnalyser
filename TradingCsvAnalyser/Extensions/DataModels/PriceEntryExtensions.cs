@@ -2,6 +2,7 @@
 using System.Linq;
 using TradingCsvAnalyser.Models;
 using TradingCsvAnalyser.Models.AnalysisResults;
+using TradingCsvAnalyser.Models.Enums;
 
 namespace TradingCsvAnalyser.Extensions.DataModels;
 
@@ -45,8 +46,35 @@ public static class PriceEntryExtensions
         return data;
     }
 
-    public static IQueryable<PriceEntry> FilterByDayResult(this IQueryable<PriceEntry> entries, bool upClose)
+    public static DayOfWeekData GetUpDayRatioPerDay(this IQueryable<PriceEntry> entries)
     {
-        return entries.Where(e => e.Close > e.Open == upClose);
+        DayOfWeekData data = new();
+        foreach (var day in entries.AsEnumerable().GroupBy(e => e.Day))
+        {
+            decimal upDays = day.Count(i => i.Close > i.Open);
+            decimal downDays = day.Count(i => i.Open > i.Close);
+            data.AddDay(day.Key, upDays / (downDays+upDays));
+        }
+
+        return data;
+    }
+
+    public static IQueryable<PriceEntry> FilterByDayResult(this IQueryable<PriceEntry> entries, DayFilter dayFilter) =>
+        dayFilter switch
+        {
+            DayFilter.None => entries,
+            DayFilter.DownDay => entries.OnlyDownDays(),
+            DayFilter.UpDay => entries.OnlyUpDays(),
+            _ => throw new ArgumentException($"Unavailable DayFilter {dayFilter}")
+        };
+
+    private static IQueryable<PriceEntry> OnlyUpDays(this IQueryable<PriceEntry> entries)
+    {
+        return entries.Where(e => e.Close > e.Open);
+    }
+
+    private static IQueryable<PriceEntry> OnlyDownDays(this IQueryable<PriceEntry> entries)
+    {
+        return entries.Where(e => e.Open > e.Close);
     }
 }

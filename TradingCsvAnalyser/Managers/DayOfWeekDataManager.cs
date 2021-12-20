@@ -1,9 +1,8 @@
 ﻿using System;
 using TradingCsvAnalyser.DataProviders;
-using TradingCsvAnalyser.Extensions;
 using TradingCsvAnalyser.Extensions.DataModels;
 using TradingCsvAnalyser.Models.AnalysisResults;
-using TradingCsvAnalyser.Models.Enums;
+using TradingCsvAnalyser.Models.HelperModels;
 
 namespace TradingCsvAnalyser.Managers;
 
@@ -16,34 +15,32 @@ public class DayOfWeekDataManager : IDayOfWeekDataManager
         _data = data;
     }
 
-    public DayOfWeekData GetAverageRangePerDay(CandleRange rangeType)
+    public DayOfWeekData GetAverageRangePerDay(DoWDefaultParameters parameters)
     {
-        return _data.PriceEntryRepository.GetAllEntries()
-            .GetAveragePerDay(i => i.Range(rangeType));
+        return _data.PriceEntryRepository.GetEntriesForSymbol(parameters.Symbol).FilterByDayResult(parameters.DayFilter)
+            .GetAveragePerDay(i => i.Range(parameters.RangeType));
     }
 
-    public DayOfWeekData GetAverageRangePerDay(CandleRange rangeType, string symbol)
+    public DayOfWeekData GetSumRangePerDay(DoWDefaultParameters parameters)
+    {
+        return _data.PriceEntryRepository.GetEntriesForSymbol(parameters.Symbol).FilterByDayResult(parameters.DayFilter)
+            .GetSumPerDay(i => i.Range(parameters.RangeType));
+    }
+
+    public DayOfWeekData GetUpDayRatioPerDay(string symbol)
     {
         return _data.PriceEntryRepository.GetEntriesForSymbol(symbol)
-            .GetAveragePerDay(i => i.Range(rangeType));
+            .GetUpDayRatioPerDay();
     }
 
-    public DayOfWeekData GetSumRangePerDay(CandleRange rangeType, string symbol)
+    public DayOfWeekData CallMethodByName(string method, DoWDefaultParameters parameters)
     {
-        return _data.PriceEntryRepository.GetEntriesForSymbol(symbol)
-            .GetSumPerDay(i => i.Range(rangeType));
-    }
-
-    public DayOfWeekData CallMethodByName(string method, CandleRange rangeType, string symbol)
-    {
-        switch (method)
+        return method switch
         {
-            case nameof(GetAverageRangePerDay):
-                return GetAverageRangePerDay(rangeType, symbol);
-            case nameof(GetSumRangePerDay):
-                return GetSumRangePerDay(rangeType, symbol);
-            default:
-                throw new ArgumentException($"{method} is not a valid Method");
-        }
+            nameof(GetAverageRangePerDay) => GetAverageRangePerDay(parameters),
+            nameof(GetSumRangePerDay) => GetSumRangePerDay(parameters),
+            nameof(GetUpDayRatioPerDay) => GetUpDayRatioPerDay(parameters.Symbol),
+            _ => throw new ArgumentException($"{method} is not a valid Method")
+        };
     }
 }

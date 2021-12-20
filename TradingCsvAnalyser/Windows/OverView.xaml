@@ -22,7 +22,8 @@
                   Width="150" Height="25" VerticalAlignment="Top">
         </ComboBox>
         <ComboBox Margin="200,0,0,0" Width="100" Height="25" HorizontalAlignment="Left"
-                  VerticalAlignment="Top" Name="DayFilterBox">
+                  VerticalAlignment="Top" Name="DayFilterBox"
+                  SelectionChanged="DayFilterBox_OnSelectionChanged">
         </ComboBox>
         <Button Click="OpenImportWindow" Width="100" Height="50"
                 HorizontalAlignment="Right" VerticalAlignment="Top">

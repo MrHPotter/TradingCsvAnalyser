@@ -1,6 +1,6 @@
 ﻿namespace TradingCsvAnalyser.Models.Enums;
 
-public enum DayFilters
+public enum DayFilter
 {
     None,
     UpDay,
