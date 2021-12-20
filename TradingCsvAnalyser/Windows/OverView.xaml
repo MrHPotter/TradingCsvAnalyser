@@ -21,6 +21,10 @@
                   DropDownOpened="SelectorBox_OnDropDownOpened" Name="SelectorBox" 
                   Width="150" Height="25" VerticalAlignment="Top">
         </ComboBox>
+        <ComboBox Margin="200,0,0,0" Width="100" Height="25" HorizontalAlignment="Left"
+                  VerticalAlignment="Top" Name="DayFilterBox"
+                  SelectionChanged="DayFilterBox_OnSelectionChanged">
+        </ComboBox>
         <Button Click="OpenImportWindow" Width="100" Height="50"
                 HorizontalAlignment="Right" VerticalAlignment="Top">
             Add new Data
@@ -31,6 +35,9 @@
                 Click="AnalyseButton_OnClick">
             Analyse
         </Button>
+        <Label Margin="200,25,0,0" Width="100" Height="25" 
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top">DayFilter</Label>
         <Label Width="120" Height="25" VerticalAlignment="Top"
                HorizontalAlignment="Left"
                Margin="20,25,0,0">Symbol</Label>

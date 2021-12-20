@@ -24,7 +24,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddSingleton<IUnitOfWork, UnitOfWork>();
         services.AddTransient<IReader, CsvReader>();
-        services.AddTransient<IAggregationManager, AggregationManager>();
+        services.AddTransient<IDayOfWeekDataManager, DayOfWeekDataManager>();
         services.AddTransient(typeof(ImportWindow));
         services.AddTransient(typeof(OverView));
     }
