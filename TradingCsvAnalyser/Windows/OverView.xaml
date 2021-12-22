@@ -45,7 +45,7 @@
                Margin="20,25,0,0">Type of Range</Label>
         <Label Width="120" Height="25" VerticalAlignment="Top"
                Margin="0,25,280,0">Method</Label>
-        <DataGrid Height="200" Width="1200" Margin="0,100,0,100" Name="MainDataGrid"></DataGrid>
+        <DataGrid Height="660" Width="1200" Margin="0,100,0,100" Name="MainDataGrid"></DataGrid>
     </Grid>
    
 </Window>
