@@ -3,5 +3,6 @@
 public enum DbProvider
 {
     SqLite,
-    PostgreSql
+    PostgreSql,
+    MySql
 }

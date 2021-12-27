@@ -7,7 +7,7 @@ namespace TradingCsvAnalyser.Models.Database;
 
 public class AnalyserContext : DbContext
 {
-private const string ConnectionString = "Data Source=analyser.db";
+private const string ConnectionString = "SERVER=localhost; DATABASE=AnalyserTest; UID=root; PASSWORD=example";
 
 public AnalyserContext(DbContextOptions<AnalyserContext> options) : base(options)
     {
@@ -24,7 +24,7 @@ public AnalyserContext(DbContextOptions<AnalyserContext> options) : base(options
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite(ConnectionString);
+        optionsBuilder.UseMySql(ConnectionString, ServerVersion.AutoDetect(ConnectionString));
         optionsBuilder.UseLazyLoadingProxies();
         
         base.OnConfiguring(optionsBuilder);

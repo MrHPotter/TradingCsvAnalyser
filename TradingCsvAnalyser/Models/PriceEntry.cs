@@ -17,7 +17,7 @@ public class PriceEntry
     public PriceEntry(DateTimeOffset dateAndTime, decimal open, decimal high, 
         decimal low, decimal close,  string symbol)
     {
-        DateAndTime = dateAndTime;
+        DateAndTime = dateAndTime.LocalDateTime;
         Open = open;
         High = high;
         Low = low;
@@ -27,7 +27,7 @@ public class PriceEntry
 
     public PriceEntry(PriceDownload input, string symbol)
     {
-        DateAndTime = input.Date;
+        DateAndTime = input.Date.LocalDateTime;
         Close = input.Price;
         Open = input.Open;
         High = input.High;
@@ -35,7 +35,7 @@ public class PriceEntry
         Symbol = symbol;
     }
 
-    public DateTimeOffset DateAndTime { get; set; }
+    public DateTime DateAndTime { get; set; }
     public decimal Open { get; set; }
     public decimal High { get; set; }
     public decimal Low { get; set; }
