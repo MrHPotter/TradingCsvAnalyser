@@ -49,7 +49,7 @@ public partial class OverView : Window
 
     private void SetupMethodList()
     {
-        foreach (var methodName in _serviceProvider.GetRequiredService<IDayOfWeekDataManager>().GetDayOfWeekMethods())
+        foreach (var methodName in _serviceProvider.GetRequiredService<IDayOfWeekDataManager>().GetMethodNames())
         {
             if(methodName=="CallMethodByName")
                 continue;

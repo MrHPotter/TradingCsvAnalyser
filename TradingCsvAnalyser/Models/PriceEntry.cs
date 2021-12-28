@@ -77,12 +77,12 @@ public class PriceEntry
         _ => throw new ArgumentOutOfRangeException(nameof(rangeType), $"Unexpected value for Range Type: {rangeType}")
     };
 
-    private decimal OpenCloseRange() =>  Close - Open;
-    private decimal HighLowRange() => High - Low;
-    private decimal OpenHighRange() => High-Open;
-    private decimal OpenLowRange() => Open - Low;
-    private decimal LowCloseRange() => Close - Low;
-    private decimal HighCloseRange() => High - Close;
+    public decimal OpenCloseRange() =>  Close - Open;
+    public decimal HighLowRange() => High - Low;
+    public decimal OpenHighRange() => High-Open;
+    public decimal OpenLowRange() => Open - Low;
+    public decimal LowCloseRange() => Close - Low;
+    public decimal HighCloseRange() => High - Close;
 
     public static implicit operator PriceEntry?(PriceDownloadWithSymbol? download)
     {

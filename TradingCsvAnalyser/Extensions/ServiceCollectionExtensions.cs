@@ -19,6 +19,7 @@ public static class ServiceCollectionExtensions
         services.AddTransient(typeof(ImportWindow));
         services.AddTransient(typeof(OverView));
         services.AddTransient(typeof(DetailAnalysisWindow));
+        services.AddTransient(typeof(FollowDayWindow));
     }
     
 }
