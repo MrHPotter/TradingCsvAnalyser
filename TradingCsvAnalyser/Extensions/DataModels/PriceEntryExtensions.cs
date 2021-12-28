@@ -3,6 +3,7 @@ using System.Linq;
 using TradingCsvAnalyser.Models;
 using TradingCsvAnalyser.Models.AnalysisResults;
 using TradingCsvAnalyser.Models.Enums;
+using TradingCsvAnalyser.Models.HelperModels;
 
 namespace TradingCsvAnalyser.Extensions.DataModels;
 
@@ -21,7 +22,7 @@ public static class PriceEntryExtensions
 
     public static IQueryable<PriceEntry> FilterForDayOfWeek(this IQueryable<PriceEntry> entries, DayOfWeek weekDay)
     {
-        return entries.Where(e => e.Day == weekDay);
+        return entries.AsEnumerable().Where(e => e.Day == weekDay).AsQueryable();
     }
 
     public static DayOfWeekData GetAveragePerDay(this IQueryable<PriceEntry> entries, Func<PriceEntry, decimal> selector)
@@ -76,5 +77,11 @@ public static class PriceEntryExtensions
     private static IQueryable<PriceEntry> OnlyDownDays(this IQueryable<PriceEntry> entries)
     {
         return entries.Where(e => e.Open > e.Close);
+    }
+
+    public static IQueryable<PriceEntry> FilterByDateRange(this IQueryable<PriceEntry> entries, DateRange dateRange)
+    {
+        return entries.Where(e => e.DateAndTime >= (dateRange.Start ?? DateTime.MinValue) &&
+                                  e.DateAndTime <= (dateRange.End ?? DateTime.MaxValue));
     }
 }

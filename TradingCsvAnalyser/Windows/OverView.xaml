@@ -18,10 +18,10 @@
                   Width="150" Height="25" VerticalAlignment="Top"
                   Margin="0,0,300,0"></ComboBox>
         <ComboBox SelectionChanged="SelectorBox_OnSelectionChanged" 
-                  DropDownOpened="SelectorBox_OnDropDownOpened" Name="SelectorBox" 
+                  DropDownOpened="SelectorBox_OnDropDownOpened" Name="DayRangeSelectorBox" 
                   Width="150" Height="25" VerticalAlignment="Top">
         </ComboBox>
-        <ComboBox Margin="200,0,0,0" Width="100" Height="25" HorizontalAlignment="Left"
+        <ComboBox Margin="150,0,0,0" Width="100" Height="25" HorizontalAlignment="Left"
                   VerticalAlignment="Top" Name="DayFilterBox"
                   SelectionChanged="DayFilterBox_OnSelectionChanged">
         </ComboBox>
@@ -29,13 +29,19 @@
                 HorizontalAlignment="Right" VerticalAlignment="Top">
             Add new Data
         </Button>
+        <DatePicker Width="70" Height="25" HorizontalAlignment="Center"
+                    VerticalAlignment="Top" Margin="220,0,0,0"
+                    Name="StartDatePicker" SelectedDateChanged="StartDatePicker_OnSelectedDateChanged"></DatePicker>
+        <DatePicker Width="70" Height="25" HorizontalAlignment="Center"
+                    VerticalAlignment="Top" Margin="360,0,0,0"
+                    Name="EndDatePicker" SelectedDateChanged="EndDatePicker_OnSelectedDateChanged"></DatePicker>
         <Button Width="100" Height="25"
-                HorizontalAlignment="Center" VerticalAlignment="Top"
-                Margin="250,0,0,0" Name="AnalyseButton"
+                HorizontalAlignment="Right" VerticalAlignment="Top"
+                Margin="0,0,220,0" Name="AnalyseButton"
                 Click="AnalyseButton_OnClick">
             Analyse
         </Button>
-        <Label Margin="200,25,0,0" Width="100" Height="25" 
+        <Label Margin="160,25,0,0" Width="80" Height="25" 
                HorizontalAlignment="Left"
                VerticalAlignment="Top">DayFilter</Label>
         <Label Width="120" Height="25" VerticalAlignment="Top"
@@ -45,7 +51,13 @@
                Margin="20,25,0,0">Type of Range</Label>
         <Label Width="120" Height="25" VerticalAlignment="Top"
                Margin="0,25,280,0">Method</Label>
-        <DataGrid Height="660" Width="1200" Margin="0,100,0,100" Name="MainDataGrid"></DataGrid>
+        <Button Width="120" Height="25" 
+                Margin="0,0,100,0"
+                HorizontalAlignment="Right" VerticalAlignment="Top"
+                Click="DetailAnalysisButton_OnClick">
+            Detail Analysis
+        </Button>
+        <DataGrid AutoGeneratingColumn="MainDataGrid_OnAutoGeneratingColumn" Height="660" Width="1250" Margin="0,100,0,100" Name="MainDataGrid"></DataGrid>
     </Grid>
    
 </Window>

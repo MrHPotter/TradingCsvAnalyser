@@ -17,19 +17,21 @@ public class DayOfWeekDataManager : IDayOfWeekDataManager
 
     public DayOfWeekData GetAverageRangePerDay(DoWDefaultParameters parameters)
     {
-        return _data.PriceEntryRepository.GetEntriesForSymbol(parameters.Symbol).FilterByDayResult(parameters.DayFilter)
+        return _data.PriceEntryRepository.GetEntriesForSymbol(parameters.Symbol).FilterByDateRange(parameters.DateRange)
+            .FilterByDayResult(parameters.DayFilter)
             .GetAveragePerDay(i => i.Range(parameters.RangeType));
     }
 
     public DayOfWeekData GetSumRangePerDay(DoWDefaultParameters parameters)
     {
-        return _data.PriceEntryRepository.GetEntriesForSymbol(parameters.Symbol).FilterByDayResult(parameters.DayFilter)
+        return _data.PriceEntryRepository.GetEntriesForSymbol(parameters.Symbol).FilterByDateRange(parameters.DateRange)
+            .FilterByDayResult(parameters.DayFilter)
             .GetSumPerDay(i => i.Range(parameters.RangeType));
     }
 
-    public DayOfWeekData GetUpDayRatioPerDay(string symbol)
+    public DayOfWeekData GetUpDayRatioPerDay(string symbol, DateRange dateRange)
     {
-        return _data.PriceEntryRepository.GetEntriesForSymbol(symbol)
+        return _data.PriceEntryRepository.GetEntriesForSymbol(symbol).FilterByDateRange(dateRange)
             .GetUpDayRatioPerDay();
     }
 
@@ -39,7 +41,7 @@ public class DayOfWeekDataManager : IDayOfWeekDataManager
         {
             nameof(GetAverageRangePerDay) => GetAverageRangePerDay(parameters),
             nameof(GetSumRangePerDay) => GetSumRangePerDay(parameters),
-            nameof(GetUpDayRatioPerDay) => GetUpDayRatioPerDay(parameters.Symbol),
+            nameof(GetUpDayRatioPerDay) => GetUpDayRatioPerDay(parameters.Symbol, parameters.DateRange),
             _ => throw new ArgumentException($"{method} is not a valid Method")
         };
     }
