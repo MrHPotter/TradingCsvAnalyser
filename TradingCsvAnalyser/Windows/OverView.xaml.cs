@@ -7,6 +7,7 @@ using System.Windows.Documents;
 using Microsoft.Extensions.DependencyInjection;
 using TradingCsvAnalyser.DataProviders;
 using TradingCsvAnalyser.Extensions;
+using TradingCsvAnalyser.Factories;
 using TradingCsvAnalyser.Managers;
 using TradingCsvAnalyser.Models;
 using TradingCsvAnalyser.Models.AnalysisResults;
@@ -18,16 +19,19 @@ namespace TradingCsvAnalyser.Windows;
 public partial class OverView : Window
 {
     private readonly IServiceProvider _serviceProvider;
+    private readonly IWindowFactory _windowFactory;
     private string? _candleRangeSelection;
     private string? _selectedSymbol;
     private string? _selectedMethod;
     private DayFilter _selectedDayFilter = DayFilter.None;
+    private readonly DateRange _selectedDateRange;
     private readonly ObservableCollection<DoWOverview> _dayOfWeekData;
-    public OverView(IServiceProvider serviceProvider)
+    public OverView(IServiceProvider serviceProvider, IWindowFactory windowFactory)
     {
+        _selectedDateRange = new();
         _dayOfWeekData = new();
-        
         _serviceProvider = serviceProvider;
+        _windowFactory = windowFactory;
         InitializeComponent();
         SetupMainDataGrid();
         SetupMethodList();
@@ -38,7 +42,7 @@ public partial class OverView : Window
     {
         MainDataGrid.AutoGenerateColumns = true;
         MainDataGrid.ItemsSource = _dayOfWeekData;
-        MainDataGrid.ItemTemplate = new DataTemplate(typeof(DayOfWeekData));
+        MainDataGrid.ItemStringFormat = "0.####";
         MainDataGrid.UpdateLayout();
     }
 
@@ -106,8 +110,9 @@ public partial class OverView : Window
         {
             if(!String.IsNullOrWhiteSpace(_selectedSymbol) && !String.IsNullOrWhiteSpace(_selectedMethod))
                 _dayOfWeekData.Add(new
-                    (aggregator.CallMethodByName(_selectedMethod, new DoWDefaultParameters(candleRange, _selectedSymbol, _selectedDayFilter))
-                        ,_selectedSymbol,_candleRangeSelection, _selectedMethod, _selectedDayFilter));
+                    (aggregator.CallMethodByName(_selectedMethod, new DoWDefaultParameters
+                            (candleRange, _selectedSymbol, _selectedDayFilter, _selectedDateRange))
+                        ,_selectedSymbol,_candleRangeSelection, _selectedMethod, _selectedDayFilter, _selectedDateRange));
             else
             {
                 throw new ArgumentException("Please Select a Symbol and Method");
@@ -125,5 +130,26 @@ public partial class OverView : Window
     {
         if (Enum.TryParse<DayFilter>(DayFilterBox.SelectedItem.ToString(), out var result))
             _selectedDayFilter = result;
+    }
+
+    private void DetailAnalysisButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        _windowFactory.CreateWindow<DetailAnalysisWindow>();
+    }
+
+    private void EndDatePicker_OnSelectedDateChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        _selectedDateRange.End = EndDatePicker.SelectedDate;
+    }
+
+    private void StartDatePicker_OnSelectedDateChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        _selectedDateRange.Start = StartDatePicker.SelectedDate;
+    }
+
+    private void MainDataGrid_OnAutoGeneratingColumn(object? sender, DataGridAutoGeneratingColumnEventArgs e)
+    {
+        if(e.PropertyType == typeof(decimal?))
+            (e.Column as DataGridTextColumn).Binding.StringFormat = "0.######";
     }
 }
