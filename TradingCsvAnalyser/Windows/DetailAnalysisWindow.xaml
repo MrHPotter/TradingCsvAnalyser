@@ -5,8 +5,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:TradingCsvAnalyser.Windows"
         mc:Ignorable="d"
-        Title="DetailAnalysis" Height="450" Width="800">
+        Title="DetailAnalysis" Height="800" Width="1300">
     <Grid>
+        <ComboBox Name="DayOfWeekPicker" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="100" 
+                  Margin="100,0,0,0"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="80" 
+               Margin="110,25,0,0">Day of Week</Label>
+        <ComboBox Name="SymbolPicker" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="100"
+                  Margin="0,0,0,0" DropDownOpened="SymbolPicker_OnDropDownOpened"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="80" 
+               Margin="10,25,0,0">Symbol</Label>
+        
+        
+        <Button Name="GetterButton" Height="25" Width="75" VerticalAlignment="Top" HorizontalAlignment="Right"
+                Click="GetterButton_OnClick">
+            Get Data
+        </Button>
+            <DataGrid AutoGeneratingColumn="DetailGrid_OnAutoGeneratingColumn" Name="DetailGrid" Height="700" Width="1300"></DataGrid>
         
     </Grid>
 </Window>

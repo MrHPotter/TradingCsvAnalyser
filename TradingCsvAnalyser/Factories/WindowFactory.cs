@@ -15,6 +15,8 @@ public class WindowFactory : IWindowFactory
 
     public TWindow CreateWindow<TWindow>() where TWindow : Window
     {
-        return _provider.GetRequiredService<TWindow>();
+        var window = _provider.GetRequiredService<TWindow>();
+        window.Show();
+        return window;
     }
 }

@@ -41,6 +41,7 @@
 
     <ItemGroup>
       <Folder Include="DataProviders\Repositories" />
+      <Folder Include="Models\QueryModels" />
       <Folder Include="Providers" />
       <Folder Include="Tests" />
     </ItemGroup>

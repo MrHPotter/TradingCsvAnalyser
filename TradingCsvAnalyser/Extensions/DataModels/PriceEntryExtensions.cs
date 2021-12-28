@@ -22,7 +22,7 @@ public static class PriceEntryExtensions
 
     public static IQueryable<PriceEntry> FilterForDayOfWeek(this IQueryable<PriceEntry> entries, DayOfWeek weekDay)
     {
-        return entries.Where(e => e.Day == weekDay);
+        return entries.AsEnumerable().Where(e => e.Day == weekDay).AsQueryable();
     }
 
     public static DayOfWeekData GetAveragePerDay(this IQueryable<PriceEntry> entries, Func<PriceEntry, decimal> selector)

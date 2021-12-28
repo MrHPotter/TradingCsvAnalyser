@@ -18,10 +18,10 @@
                   Width="150" Height="25" VerticalAlignment="Top"
                   Margin="0,0,300,0"></ComboBox>
         <ComboBox SelectionChanged="SelectorBox_OnSelectionChanged" 
-                  DropDownOpened="SelectorBox_OnDropDownOpened" Name="SelectorBox" 
+                  DropDownOpened="SelectorBox_OnDropDownOpened" Name="DayRangeSelectorBox" 
                   Width="150" Height="25" VerticalAlignment="Top">
         </ComboBox>
-        <ComboBox Margin="200,0,0,0" Width="100" Height="25" HorizontalAlignment="Left"
+        <ComboBox Margin="150,0,0,0" Width="100" Height="25" HorizontalAlignment="Left"
                   VerticalAlignment="Top" Name="DayFilterBox"
                   SelectionChanged="DayFilterBox_OnSelectionChanged">
         </ComboBox>
@@ -41,7 +41,7 @@
                 Click="AnalyseButton_OnClick">
             Analyse
         </Button>
-        <Label Margin="200,25,0,0" Width="100" Height="25" 
+        <Label Margin="160,25,0,0" Width="80" Height="25" 
                HorizontalAlignment="Left"
                VerticalAlignment="Top">DayFilter</Label>
         <Label Width="120" Height="25" VerticalAlignment="Top"

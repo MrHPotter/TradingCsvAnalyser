@@ -36,4 +36,37 @@ public static class DateTimeExtensions
     {
         return new DateOnly(date.Year, date.Month, date.Day);
     }
+    
+    public static bool IsWeekDay(this DateTime dateTime)
+    {
+        switch (dateTime.DayOfWeek)
+        {
+            case DayOfWeek.Monday:
+            case DayOfWeek.Tuesday:
+            case DayOfWeek.Wednesday:
+            case DayOfWeek.Thursday:
+            case DayOfWeek.Friday:
+                return true;
+            case DayOfWeek.Sunday:
+            case DayOfWeek.Saturday:
+            default:
+                return false;
+        }
+    }
+    public static bool IsWeekDay(this DayOfWeek dayOfWeek)
+    {
+        switch (dayOfWeek)
+        {
+            case DayOfWeek.Monday:
+            case DayOfWeek.Tuesday:
+            case DayOfWeek.Wednesday:
+            case DayOfWeek.Thursday:
+            case DayOfWeek.Friday:
+                return true;
+            case DayOfWeek.Sunday:
+            case DayOfWeek.Saturday:
+            default:
+                return false;
+        }
+    }
 }

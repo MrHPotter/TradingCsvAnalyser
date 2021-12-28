@@ -28,17 +28,12 @@ public class PriceEntryRepository : IPriceEntryRepository
 
     public IQueryable<PriceEntry> GetEntriesForSymbol(string symbol)
     {
-        return _context.PriceEntries.Where(i => i.Symbol.ToLower() == symbol.ToLower());
+        return GetAllEntries().Where(i => i.Symbol.ToLower() == symbol.ToLower());
     }
 
-    public IQueryable<PriceEntry> GetEntriesInTimeRange(DateTime start, DateTime end)
+    public IQueryable<PriceEntry> GetEntriesForDay(string symbol, DayOfWeek dayOfWeek)
     {
-        return _context.PriceEntries.FilterForTimeRange(start.Date, end.Date);
-    }
-
-    public IQueryable<PriceEntry> GetTimeEntriesForDay(DayOfWeek dayOfWeek)
-    {
-        return _context.PriceEntries.FilterForDayOfWeek(dayOfWeek);
+        return GetEntriesForSymbol(symbol).FilterForDayOfWeek(dayOfWeek);
     }
 
     public IEnumerable<string> GetAvailableSymbols()

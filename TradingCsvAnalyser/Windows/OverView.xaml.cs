@@ -34,6 +34,7 @@ public partial class OverView : Window
         _windowFactory = windowFactory;
         InitializeComponent();
         SetupMainDataGrid();
+        FillSymbolSelector();
         SetupMethodList();
         SetupDayFilterBox();
     }
@@ -73,17 +74,17 @@ public partial class OverView : Window
     private void SelectorBox_OnDropDownOpened(object? sender, EventArgs e)
     {
         Console.WriteLine("Opening Drop Down Menu");
-        if(!SelectorBox.HasItems)
+        if(!DayRangeSelectorBox.HasItems)
             foreach (var value in Enum.GetValues(typeof(CandleRange)))
             {
-                if (value is not null && !SelectorBox.Items.Contains(value))
-                    SelectorBox.Items.Add(value);
+                if (value is not null && !DayRangeSelectorBox.Items.Contains(value))
+                    DayRangeSelectorBox.Items.Add(value);
             }
     }
 
     private void SelectorBox_OnSelectionChanged(object sender, RoutedEventArgs e)
     {
-        _candleRangeSelection = SelectorBox.SelectedItem?.ToString();
+        _candleRangeSelection = DayRangeSelectorBox.SelectedItem?.ToString();
         Console.WriteLine($"Selected {_candleRangeSelection}");
     }
 
@@ -94,6 +95,11 @@ public partial class OverView : Window
     }
 
     private void SymbolSelectorBox_OnDropDownOpened(object? sender, EventArgs e)
+    {
+        FillSymbolSelector();
+    }
+
+    private void FillSymbolSelector()
     {
         var unit = _serviceProvider.GetRequiredService<IUnitOfWork>();
         var symbols = unit.PriceEntryRepository.GetAvailableSymbols();
