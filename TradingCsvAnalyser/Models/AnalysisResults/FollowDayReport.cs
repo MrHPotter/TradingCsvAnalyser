@@ -20,6 +20,6 @@ public class FollowDayReport
     
     public decimal AverageRange { get; set; } 
     
-    FollowDayParameters Parameters { get; set; } 
+    public FollowDayParameters Parameters { get; set; } 
     
 }

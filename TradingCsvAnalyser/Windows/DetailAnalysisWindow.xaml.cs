@@ -18,11 +18,8 @@ public partial class DetailAnalysisWindow : Window
     
     private ObservableCollection<PriceEntryResult> _priceEntries;
     private string? _symbol() => SymbolPicker.SelectedItem?.ToString();
-    private DayOfWeek? _dayOfWeek()
-    {
-        Enum.TryParse<DayOfWeek>(DayOfWeekPicker.SelectedItem?.ToString(), out var dayOfWeek);
-        return dayOfWeek;
-    }
+    private DayOfWeek? _dayOfWeek() => DayOfWeekPicker.SelectedItem.GetDayOfWeek();
+    
     public DetailAnalysisWindow(IServiceProvider serviceProvider, IUnitOfWork data)
     {
         _serviceProvider = serviceProvider;

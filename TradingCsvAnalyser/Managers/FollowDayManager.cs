@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using TradingCsvAnalyser.DataProviders;
 using TradingCsvAnalyser.Extensions.DataModels;
 using TradingCsvAnalyser.Models;
@@ -23,15 +24,16 @@ public class FollowDayManager : IFollowDayManager
         decimal totalGainFollow = 0;
         decimal upDaysCountFollow = 0;
         
-        var sourceDays = GetSourceEntries(parameters);
+        var sourceDays = GetSourceEntries(parameters).ToList();
         
         decimal totalDaysCount = sourceDays.Count();
         
-        var followDays = GetFollowEntries(parameters);
+        var potentialFollowDays = GetFollowEntries(parameters).ToList();
+        List<PriceEntry> actualFollowDays = new();
         
         foreach (var sourceDay in sourceDays)
         {
-            var followDay = followDays.FirstOrDefault(d => d.DateAndTime > sourceDay.DateAndTime);
+            var followDay = potentialFollowDays.FirstOrDefault(d => d.DateAndTime > sourceDay.DateAndTime);
             if (followDay is null)
             {
                 totalDaysCount = -1;
@@ -43,15 +45,32 @@ public class FollowDayManager : IFollowDayManager
             
             totalRangeFollow += followDay.HighLowRange();
             totalGainFollow += followDay.OpenCloseRange();
-
+            actualFollowDays.Add(followDay);
         }
 
+        var averageOpenLowFollow = actualFollowDays.Average(p => p.OpenLowRange());
+        var maxOpenLowFollow = actualFollowDays.Max(p => p.OpenLowRange());
+        
+        
         var upDayRatioFollow = upDaysCountFollow / totalDaysCount;
         var averageRangeFollow = totalRangeFollow / totalDaysCount;
         var averageGainFollow = totalGainFollow / totalDaysCount;
         return new FollowDayReport(upDayRatioFollow, averageGainFollow, averageRangeFollow, parameters);
     }
 
+    private List<PriceEntry> GetFollowDays(FollowDayParameters parameters)
+    {
+        var sourceDays = GetSourceEntries(parameters).ToList(); 
+        var potentialFollowDays = GetFollowEntries(parameters).ToList();
+        List<PriceEntry> actualFollowDays = new();
+        foreach (var priceEntry in sourceDays)
+        {
+            var followDay = potentialFollowDays.FirstOrDefault(d => d.DateAndTime > priceEntry.DateAndTime);
+            if (followDay is null) break;
+            actualFollowDays.Add(followDay);
+        }
+        return actualFollowDays;
+    }
     private IQueryable<PriceEntry> GetSourceEntries(FollowDayParameters parameters)
     {
         return _data.PriceEntryRepository

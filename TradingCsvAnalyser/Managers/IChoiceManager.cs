@@ -14,4 +14,6 @@ public interface IChoiceManager
 
     public IEnumerable<DayOfWeek> GetValidDays();
 
+    public IEnumerable<DayFilter> GetValidDirections();
+
 }

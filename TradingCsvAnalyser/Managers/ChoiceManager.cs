@@ -37,4 +37,9 @@ public class ChoiceManager : IChoiceManager
     {
         return Enum.GetValues<DayOfWeek>().Where(d => d.IsWeekDay());
     }
+
+    public IEnumerable<DayFilter> GetValidDirections()
+    {
+        return Enum.GetValues<DayFilter>();
+    }
 }

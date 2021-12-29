@@ -158,4 +158,9 @@ public partial class OverView : Window
         if(e.PropertyType == typeof(decimal?))
             (e.Column as DataGridTextColumn).Binding.StringFormat = "0.######";
     }
+
+    private void FollowDayButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        _windowFactory.CreateWindow<FollowDayWindow>();
+    }
 }
