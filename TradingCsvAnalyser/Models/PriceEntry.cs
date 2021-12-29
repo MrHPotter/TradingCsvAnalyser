@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Win32;
 using TradingCsvAnalyser.Extensions;
+using TradingCsvAnalyser.Extensions.BaseTypeExtensions;
 using TradingCsvAnalyser.Models.Enums;
 using TradingCsvAnalyser.Models.SourceModels;
 

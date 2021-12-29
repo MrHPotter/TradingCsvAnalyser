@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TradingCsvAnalyser.DataProviders;
 using TradingCsvAnalyser.Extensions;
+using TradingCsvAnalyser.Extensions.BaseTypeExtensions;
 using TradingCsvAnalyser.Models.Enums;
 
 namespace TradingCsvAnalyser.Managers;

@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using TradingCsvAnalyser.DataProviders;
 using TradingCsvAnalyser.Extensions;
+using TradingCsvAnalyser.Extensions.BaseTypeExtensions;
 using TradingCsvAnalyser.Models;
 
 namespace TradingCsvAnalyser.Windows;
