@@ -10,8 +10,8 @@ public class DayScenario
         DayOfWeek = dayOfWeek;
         Direction = direction;
     }
-    DayOfWeek DayOfWeek { get; set; } 
-    DayFilter Direction { get; set; }
+    public DayOfWeek DayOfWeek { get; set; } 
+    public DayFilter Direction { get; set; }
 
     public override string ToString()
     {

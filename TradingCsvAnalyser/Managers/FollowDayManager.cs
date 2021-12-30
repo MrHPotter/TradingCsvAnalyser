@@ -26,16 +26,19 @@ public class FollowDayManager : IFollowDayManager
         decimal totalGainFollow = 0;
         decimal upDaysCountFollow = 0;
         
-        var sourceDays = GetSourceEntries(parameters).ToList();
+        var allEntries = _data.PriceEntryRepository.GetEntriesForSymbol(parameters.Symbol).ToList();
         
-        decimal totalDaysCount = sourceDays.Count();
+        var scenarioDays = GetSourceEntries(parameters).Where(p => p.MatchesScenario(parameters.Scenario, allEntries.AsQueryable())).ToList();
+        
+        
+        decimal totalDaysCount = scenarioDays.Count;
         
         var potentialFollowDays = GetFollowEntries(parameters).ToList();
         List<PriceEntry> actualFollowDays = new();
         
-        foreach (var sourceDay in sourceDays)
+        foreach (var day in scenarioDays)
         {
-            var followDay = potentialFollowDays.FirstOrDefault(d => d.DateAndTime > sourceDay.DateAndTime);
+            var followDay = potentialFollowDays.FirstOrDefault(d => d.DateAndTime > day.DateAndTime);
             if (followDay is null)
             {
                 totalDaysCount -= 1;
@@ -55,8 +58,10 @@ public class FollowDayManager : IFollowDayManager
         var maxOpenLowFollow = actualFollowDays.Max(p => p.OpenLowRange());
         var averageOpenHighFollow = actualFollowDays.Average(p => p.OpenHighRange());
         var maxOpenHighFollow = actualFollowDays.Max(p => p.OpenHighRange());
+        
         var info = new object[]
         {
+            new {SampleSize = actualFollowDays.Count},
             new {AvgOpenLow = averageOpenLowFollow.ToString("0.######")},
             new {MaxOpenLow = maxOpenLowFollow.ToString("0.##")},
             new {AvgOpenHigh = averageOpenHighFollow.ToString("0.######")},
@@ -66,6 +71,7 @@ public class FollowDayManager : IFollowDayManager
         var upDayRatioFollow = upDaysCountFollow / totalDaysCount;
         var averageRangeFollow = totalRangeFollow / totalDaysCount;
         var averageGainFollow = totalGainFollow / totalDaysCount;
+        
         return new FollowDayReport(upDayRatioFollow, averageGainFollow, averageRangeFollow, parameters, info);
     }
 
@@ -85,9 +91,9 @@ public class FollowDayManager : IFollowDayManager
     private IQueryable<PriceEntry> GetSourceEntries(FollowDayParameters parameters)
     {
         return _data.PriceEntryRepository
-            .GetEntriesForDay(parameters.Symbol, parameters.SourceDay)
+            .GetEntriesForDay(parameters.Symbol, parameters.SourceDay.DayOfWeek)
             .FilterByDateRange(parameters.DateRange)
-            .FilterByDayResult(parameters.SourceDirection);
+            .FilterByDayResult(parameters.SourceDay.Direction);
     }
 
     private IOrderedQueryable<PriceEntry> GetFollowEntries(FollowDayParameters parameters)
