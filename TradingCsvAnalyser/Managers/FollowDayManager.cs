@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TradingCsvAnalyser.DataProviders;
 using TradingCsvAnalyser.Extensions.DataModels;
 using TradingCsvAnalyser.Models;
 using TradingCsvAnalyser.Models.AnalysisResults;
 using TradingCsvAnalyser.Models.HelperModels;
+using TradingCsvAnalyser.Models.HelperModels.FollowDayAnalysis;
 
 namespace TradingCsvAnalyser.Managers;
 
@@ -36,7 +38,7 @@ public class FollowDayManager : IFollowDayManager
             var followDay = potentialFollowDays.FirstOrDefault(d => d.DateAndTime > sourceDay.DateAndTime);
             if (followDay is null)
             {
-                totalDaysCount = -1;
+                totalDaysCount -= 1;
                 break;
             }
 
@@ -48,14 +50,23 @@ public class FollowDayManager : IFollowDayManager
             actualFollowDays.Add(followDay);
         }
 
+        
         var averageOpenLowFollow = actualFollowDays.Average(p => p.OpenLowRange());
         var maxOpenLowFollow = actualFollowDays.Max(p => p.OpenLowRange());
-        
-        
+        var averageOpenHighFollow = actualFollowDays.Average(p => p.OpenHighRange());
+        var maxOpenHighFollow = actualFollowDays.Max(p => p.OpenHighRange());
+        var info = new object[]
+        {
+            new {AvgOpenLow = averageOpenLowFollow.ToString("0.######")},
+            new {MaxOpenLow = maxOpenLowFollow.ToString("0.##")},
+            new {AvgOpenHigh = averageOpenHighFollow.ToString("0.######")},
+            new {MaxOpenHigh = maxOpenHighFollow.ToString("0.##")}
+        };
+
         var upDayRatioFollow = upDaysCountFollow / totalDaysCount;
         var averageRangeFollow = totalRangeFollow / totalDaysCount;
         var averageGainFollow = totalGainFollow / totalDaysCount;
-        return new FollowDayReport(upDayRatioFollow, averageGainFollow, averageRangeFollow, parameters);
+        return new FollowDayReport(upDayRatioFollow, averageGainFollow, averageRangeFollow, parameters, info);
     }
 
     private List<PriceEntry> GetFollowDays(FollowDayParameters parameters)

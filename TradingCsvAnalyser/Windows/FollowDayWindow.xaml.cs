@@ -8,6 +8,7 @@ using TradingCsvAnalyser.Extensions;
 using TradingCsvAnalyser.Models.AnalysisResults;
 using TradingCsvAnalyser.Models.Enums;
 using TradingCsvAnalyser.Models.HelperModels;
+using TradingCsvAnalyser.Models.HelperModels.FollowDayAnalysis;
 
 namespace TradingCsvAnalyser.Windows;
 
@@ -78,5 +79,10 @@ public partial class FollowDayWindow : Window
     {
         if(e.PropertyType == typeof(decimal?) || e.PropertyType == typeof(decimal))
             (e.Column as DataGridTextColumn).Binding.StringFormat = "0.######";
+    }
+
+    private void SymbolPicker_OnDropDownOpened(object? sender, EventArgs e)
+    {
+        SymbolPicker.Items.AddNew(_choiceManager.GetAvailableSymbols());
     }
 }

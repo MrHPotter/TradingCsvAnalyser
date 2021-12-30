@@ -24,9 +24,7 @@ public class AdditionalData
         StringBuilder builder = new();
         foreach (var obj in Content)
         {
-            builder.Append(nameof(obj));
-            builder.Append(" : ");
-            builder.Append(obj);
+            builder.Append(obj.ToString()!.Replace("{","").Replace("}",""));
             builder.Append('|');
         }
 

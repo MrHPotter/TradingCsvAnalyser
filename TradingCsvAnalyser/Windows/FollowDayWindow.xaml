@@ -8,7 +8,7 @@
         Title="FollowDayWindow" Height="1000" Width="1800">
     <Grid>
         <ComboBox Name="SymbolPicker" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="100"
-                  Margin="0,0,0,0" />
+                  Margin="0,0,0,0" DropDownOpened="SymbolPicker_OnDropDownOpened"/>
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="80" 
                Margin="10,25,0,0">Symbol</Label>
         

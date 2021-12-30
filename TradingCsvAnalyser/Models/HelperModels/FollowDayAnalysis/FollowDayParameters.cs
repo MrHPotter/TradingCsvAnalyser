@@ -1,7 +1,7 @@
 ﻿using System;
 using TradingCsvAnalyser.Models.Enums;
 
-namespace TradingCsvAnalyser.Models.HelperModels;
+namespace TradingCsvAnalyser.Models.HelperModels.FollowDayAnalysis;
 
 public class FollowDayParameters
 {

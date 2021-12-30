@@ -1,5 +1,6 @@
 ﻿using TradingCsvAnalyser.Models.AnalysisResults;
 using TradingCsvAnalyser.Models.HelperModels;
+using TradingCsvAnalyser.Models.HelperModels.FollowDayAnalysis;
 
 namespace TradingCsvAnalyser.Managers;
 
