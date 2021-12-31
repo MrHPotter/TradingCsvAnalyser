@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using TradingCsvAnalyser.Extensions.BaseTypeExtensions;
 using TradingCsvAnalyser.Models;
 using TradingCsvAnalyser.Models.AnalysisResults;
 using TradingCsvAnalyser.Models.Enums;
@@ -50,7 +51,7 @@ public static class PriceEntryExtensions
     public static DayOfWeekData GetUpDayRatioPerDay(this IQueryable<PriceEntry> entries)
     {
         DayOfWeekData data = new();
-        foreach (var day in entries.AsEnumerable().GroupBy(e => e.Day))
+        foreach (var day in entries.AsEnumerable().Where(i => i.Day.IsWeekDay()).GroupBy(e => e.Day))
         {
             decimal upDays = day.Count(i => i.Close > i.Open);
             decimal downDays = day.Count(i => i.Open > i.Close);

@@ -9,10 +9,10 @@ namespace TradingCsvAnalyser.Extensions;
 public static class ManagerExtensions
 {
     private const string CallerMethodName = "CallMethodByName";
-    public static string[] GetDayOfWeekMethods<T>(this T manager)
+    public static string[] GetMethodNames<T>(this T manager)
     {
         return manager is null ? Array.Empty<string>() : 
-            manager.GetType().Methods().ThatReturn<DayOfWeekData>().Where(m => m.Name != CallerMethodName)
+            manager.GetType().Methods().Where(m => m.Name != CallerMethodName)
                 .Select(i => i.Name).ToArray();
     }
 }

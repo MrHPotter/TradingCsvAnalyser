@@ -1,5 +1,6 @@
 ﻿using System;
 using TradingCsvAnalyser.Extensions;
+using TradingCsvAnalyser.Extensions.BaseTypeExtensions;
 
 namespace TradingCsvAnalyser.Models;
 

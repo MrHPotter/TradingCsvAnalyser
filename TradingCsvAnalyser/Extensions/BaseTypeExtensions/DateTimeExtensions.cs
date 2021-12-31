@@ -1,8 +1,7 @@
 ﻿using System;
-using TradingCsvAnalyser.Models;
 using TradingCsvAnalyser.Models.HelperModels;
 
-namespace TradingCsvAnalyser.Extensions;
+namespace TradingCsvAnalyser.Extensions.BaseTypeExtensions;
 
 public static class DateTimeExtensions
 {

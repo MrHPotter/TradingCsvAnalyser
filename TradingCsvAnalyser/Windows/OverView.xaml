@@ -52,6 +52,12 @@
         <Label Width="120" Height="25" VerticalAlignment="Top"
                Margin="0,25,280,0">Method</Label>
         <Button Width="120" Height="25" 
+                Margin="0,25,100,0"
+                HorizontalAlignment="Right" VerticalAlignment="Top"
+                Click="FollowDayButton_OnClick">
+            Follow Day Analysis
+        </Button>
+        <Button Width="120" Height="25" 
                 Margin="0,0,100,0"
                 HorizontalAlignment="Right" VerticalAlignment="Top"
                 Click="DetailAnalysisButton_OnClick">

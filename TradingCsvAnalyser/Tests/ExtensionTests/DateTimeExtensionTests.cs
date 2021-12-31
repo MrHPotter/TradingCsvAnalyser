@@ -2,6 +2,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 using TradingCsvAnalyser.Extensions;
+using TradingCsvAnalyser.Extensions.BaseTypeExtensions;
 
 namespace TradingCsvAnalyser.Tests.ExtensionTests;
 

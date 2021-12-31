@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.Generic;
+using System.Windows.Controls;
 
 namespace TradingCsvAnalyser.Extensions;
 
@@ -10,12 +11,11 @@ public static class ItemCollectionExtensions
             collection.Add(newItem);
     }
     
-    public static void AddNew(this ItemCollection collection, object[] newItems)
+    public static void AddNew(this ItemCollection collection, IEnumerable<object> newItems)
     {
         foreach (var newItem in newItems)
         {
-            if (!collection.Contains(newItem))
-                collection.Add(newItem);
+            collection.AddNew(newItem);
         }
     }
 }

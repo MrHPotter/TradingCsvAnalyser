@@ -54,7 +54,7 @@ namespace TradingCsvAnalyser.Windows
 
         private void FileDialog_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            StatusLabel.Content = "";
             OpenFileDialog dialog = new OpenFileDialog();
             if (dialog.ShowDialog() is true)
             {

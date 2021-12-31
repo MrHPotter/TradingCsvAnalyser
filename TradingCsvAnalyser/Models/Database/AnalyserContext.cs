@@ -18,6 +18,8 @@ public AnalyserContext(DbContextOptions<AnalyserContext> options) : base(options
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<PriceEntry>().HasKey(entry => new { entry.Symbol,entry.DateAndTime });
+        modelBuilder.Entity<PriceEntry>().HasIndex(p => p.Symbol).IsUnique(false);
+        
         
         base.OnModelCreating(modelBuilder);
     }

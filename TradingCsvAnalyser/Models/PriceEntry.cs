@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Win32;
 using TradingCsvAnalyser.Extensions;
+using TradingCsvAnalyser.Extensions.BaseTypeExtensions;
+using TradingCsvAnalyser.Extensions.DataModels;
 using TradingCsvAnalyser.Models.Enums;
+using TradingCsvAnalyser.Models.HelperModels;
 using TradingCsvAnalyser.Models.SourceModels;
 
 
@@ -77,12 +81,36 @@ public class PriceEntry
         _ => throw new ArgumentOutOfRangeException(nameof(rangeType), $"Unexpected value for Range Type: {rangeType}")
     };
 
-    private decimal OpenCloseRange() =>  Close - Open;
-    private decimal HighLowRange() => High - Low;
-    private decimal OpenHighRange() => High-Open;
-    private decimal OpenLowRange() => Open - Low;
-    private decimal LowCloseRange() => Close - Low;
-    private decimal HighCloseRange() => High - Close;
+    public DayFilter Direction(decimal threshold)
+    {
+        if (threshold < OpenCloseRange())
+            return DayFilter.UpDay;
+        if (-threshold> OpenCloseRange())
+            return DayFilter.DownDay;
+        return DayFilter.None;
+    }
+
+    public bool MatchesScenario(IEnumerable<DayScenario> scenario, IQueryable<PriceEntry> allEntries)
+    {
+        if (!scenario.Any()) return true;
+        foreach (var dayScenario in scenario)
+        {
+            var relevantDay = allEntries
+                .FilterForDayOfWeek(dayScenario.DayOfWeek)
+                .OrderByDescending(d => d.Date)
+                .FirstOrDefault(p => p.Date< Date);
+            if (relevantDay is null || relevantDay.Direction(0) != dayScenario.Direction)
+                return false;
+        }
+
+        return true;
+    }
+    public decimal OpenCloseRange() =>  Close - Open;
+    public decimal HighLowRange() => High - Low;
+    public decimal OpenHighRange() => High-Open;
+    public decimal OpenLowRange() => Open - Low;
+    public decimal LowCloseRange() => Close - Low;
+    public decimal HighCloseRange() => High - Close;
 
     public static implicit operator PriceEntry?(PriceDownloadWithSymbol? download)
     {

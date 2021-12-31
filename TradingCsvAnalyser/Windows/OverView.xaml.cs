@@ -49,7 +49,7 @@ public partial class OverView : Window
 
     private void SetupMethodList()
     {
-        foreach (var methodName in _serviceProvider.GetRequiredService<IDayOfWeekDataManager>().GetDayOfWeekMethods())
+        foreach (var methodName in _serviceProvider.GetRequiredService<IDayOfWeekDataManager>().GetMethodNames())
         {
             if(methodName=="CallMethodByName")
                 continue;
@@ -157,5 +157,10 @@ public partial class OverView : Window
     {
         if(e.PropertyType == typeof(decimal?))
             (e.Column as DataGridTextColumn).Binding.StringFormat = "0.######";
+    }
+
+    private void FollowDayButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        _windowFactory.CreateWindow<FollowDayWindow>();
     }
 }
