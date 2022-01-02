@@ -5,5 +5,8 @@ namespace TradingCsvAnalyser.DataProviders;
 public interface IUnitOfWork
 {
     public IPriceEntryRepository PriceEntryRepository { get; }
-    public void SaveChanges();
+    public ISessionRepository SessionRepository { get; }
+    public void SaveAnalyserChanges();
+
+    public void SaveSessionChanges();
 }

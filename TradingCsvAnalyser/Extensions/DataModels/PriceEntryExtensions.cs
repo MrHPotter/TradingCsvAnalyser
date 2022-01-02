@@ -3,6 +3,7 @@ using System.Linq;
 using TradingCsvAnalyser.Extensions.BaseTypeExtensions;
 using TradingCsvAnalyser.Models;
 using TradingCsvAnalyser.Models.AnalysisResults;
+using TradingCsvAnalyser.Models.AnalysisResults.DayOfWeekAnalysis;
 using TradingCsvAnalyser.Models.Enums;
 using TradingCsvAnalyser.Models.HelperModels;
 

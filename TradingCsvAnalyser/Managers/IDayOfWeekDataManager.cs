@@ -1,5 +1,6 @@
 ﻿using System;
 using TradingCsvAnalyser.Models.AnalysisResults;
+using TradingCsvAnalyser.Models.AnalysisResults.DayOfWeekAnalysis;
 using TradingCsvAnalyser.Models.Enums;
 using TradingCsvAnalyser.Models.HelperModels;
 

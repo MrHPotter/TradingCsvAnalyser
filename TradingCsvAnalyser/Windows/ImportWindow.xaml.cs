@@ -48,7 +48,7 @@ namespace TradingCsvAnalyser.Windows
             if (currentPriceEntries.Any())
             {
                 _data.PriceEntryRepository.AddNewEntries(currentPriceEntries);
-                _data.SaveChanges();
+                _data.SaveAnalyserChanges();
             }
         }
 

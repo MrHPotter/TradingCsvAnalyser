@@ -1,12 +1,11 @@
-﻿using System;
-using TradingCsvAnalyser.Models.Enums;
-using TradingCsvAnalyser.Models.HelperModels;
+﻿using TradingCsvAnalyser.Models.HelperModels;
 using TradingCsvAnalyser.Models.HelperModels.FollowDayAnalysis;
 
-namespace TradingCsvAnalyser.Models.AnalysisResults;
+namespace TradingCsvAnalyser.Models.AnalysisResults.FollowDayReport;
 
 public class FollowDayReport
 {
+    public FollowDayReport(){}
     public FollowDayReport(decimal upDayChance, decimal averageGain, decimal averageRange, FollowDayParameters parameters, params object[] objects)
     {
         UpDayChance = upDayChance;

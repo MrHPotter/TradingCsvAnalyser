@@ -21,6 +21,20 @@
                 Margin="200,0,0,0" Click="BuilderWindowButton_OnClick"
                 Name = "BuilderWindowButton">Build Scenario</Button>
         
+        <Button Width="100" Height="50" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                Margin="0,0,0,0"
+                Name = "ClearingButton" Click="ClearingButton_OnClick">Clear Workspace</Button>
+        <Button Width="100" Height="50" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                Margin="0,0,0,50"
+                Name = "RevertButton" Click="RevertButton_OnClick">Remove Last Line</Button>
+        <Button Width="150" Height="50" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                Margin="0,0,0,50"
+                Name = "ExportButton" Click="ExportButton_OnClick">Save Workspace as CSVs</Button>
+        <Button Width="150" Height="50" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                Margin="0,0,0,0"
+                Name = "ImportReportsButton" Click="ImportReportsButton_OnClick">Load Reports From CSV</Button>
+        
+        
         <ComboBox HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" Width="100" 
                   Margin="0,0,300,0" Name="SourceDirectionPicker">
         </ComboBox>

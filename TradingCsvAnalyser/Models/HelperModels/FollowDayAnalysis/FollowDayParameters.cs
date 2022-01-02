@@ -7,6 +7,7 @@ namespace TradingCsvAnalyser.Models.HelperModels.FollowDayAnalysis;
 
 public class FollowDayParameters
 {
+    public FollowDayParameters(){}
     public FollowDayParameters(DateRange dateRange, string symbol,DayScenario sourceDay, DayOfWeek followDay, IEnumerable<DayScenario>? scenario)
     {
         DateRange = dateRange;

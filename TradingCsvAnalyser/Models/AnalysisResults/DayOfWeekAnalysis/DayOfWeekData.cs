@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TradingCsvAnalyser.Models.AnalysisResults;
+namespace TradingCsvAnalyser.Models.AnalysisResults.DayOfWeekAnalysis;
 
 public class DayOfWeekData
 {
