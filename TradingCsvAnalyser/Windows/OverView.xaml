@@ -29,11 +29,11 @@
                 HorizontalAlignment="Right" VerticalAlignment="Top">
             Add new Data
         </Button>
-        <DatePicker Width="70" Height="25" HorizontalAlignment="Center"
-                    VerticalAlignment="Top" Margin="220,0,0,0"
+        <DatePicker Width="110" Height="25" HorizontalAlignment="Center"
+                    VerticalAlignment="Top" Margin="280,0,0,0"
                     Name="StartDatePicker" SelectedDateChanged="StartDatePicker_OnSelectedDateChanged"></DatePicker>
-        <DatePicker Width="70" Height="25" HorizontalAlignment="Center"
-                    VerticalAlignment="Top" Margin="360,0,0,0"
+        <DatePicker Width="110" Height="25" HorizontalAlignment="Center"
+                    VerticalAlignment="Top" Margin="500,0,0,0"
                     Name="EndDatePicker" SelectedDateChanged="EndDatePicker_OnSelectedDateChanged"></DatePicker>
         <Button Width="100" Height="25"
                 HorizontalAlignment="Right" VerticalAlignment="Top"
