@@ -2,6 +2,7 @@
 using TradingCsvAnalyser.DataProviders;
 using TradingCsvAnalyser.Extensions.DataModels;
 using TradingCsvAnalyser.Models.AnalysisResults;
+using TradingCsvAnalyser.Models.AnalysisResults.DayOfWeekAnalysis;
 using TradingCsvAnalyser.Models.HelperModels;
 
 namespace TradingCsvAnalyser.Managers;

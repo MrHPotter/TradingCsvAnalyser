@@ -1,15 +1,20 @@
 ﻿using System;
 using TradingCsvAnalyser.Models.Enums;
 
-namespace TradingCsvAnalyser.Models.HelperModels;
+namespace TradingCsvAnalyser.Models.HelperModels.FollowDayAnalysis;
 
 public class DayScenario
 {
+    public DayScenario()
+    {
+        
+    }
     public DayScenario(DayOfWeek dayOfWeek, DayFilter direction)
     {
         DayOfWeek = dayOfWeek;
         Direction = direction;
     }
+
     public DayOfWeek DayOfWeek { get; set; } 
     public DayFilter Direction { get; set; }
 

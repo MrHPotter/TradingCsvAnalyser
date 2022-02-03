@@ -1,7 +1,7 @@
 ﻿using TradingCsvAnalyser.Models.Enums;
 using TradingCsvAnalyser.Models.HelperModels;
 
-namespace TradingCsvAnalyser.Models.AnalysisResults;
+namespace TradingCsvAnalyser.Models.AnalysisResults.DayOfWeekAnalysis;
 
 public class DoWOverview : DayOfWeekData
 {

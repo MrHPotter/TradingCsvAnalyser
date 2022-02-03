@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:TradingCsvAnalyser.Windows"
         mc:Ignorable="d"
-        Title="ScenarioBuilderWindow" Height="250" Width="400">
+        Title="ScenarioBuilderWindow" Height="300" Width="400">
     <Grid>
         <ComboBox HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" Width="100" 
                   Margin="0,0,300,0" Name="DirectionPicker">
@@ -33,6 +33,14 @@
                 >Add to Scenario
         </Button>
         
-        <DataGrid Name="ScenarioGrid" Width="400" Height="200" Margin="0,50,0,0"/>
+        <DataGrid Name="ScenarioGrid" Width="400" Height="200" Margin="0,0,0,0"
+                  AutoGeneratingColumn="ScenarioGrid_OnAutoGeneratingColumn"/>
+        
+        <Button Width="100" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                Name = "ImportButton" Click="ImportButton_OnClick">Import from Csv</Button>
+        <Button Width="100" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                Name="ExportButton" Click="ExportButton_OnClick"
+        >Export toCsv</Button>
+        
     </Grid>
 </Window>

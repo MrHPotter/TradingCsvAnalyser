@@ -7,6 +7,7 @@ using TradingCsvAnalyser.Extensions.BaseTypeExtensions;
 using TradingCsvAnalyser.Extensions.DataModels;
 using TradingCsvAnalyser.Models.Enums;
 using TradingCsvAnalyser.Models.HelperModels;
+using TradingCsvAnalyser.Models.HelperModels.FollowDayAnalysis;
 using TradingCsvAnalyser.Models.SourceModels;
 
 

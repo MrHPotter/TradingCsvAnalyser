@@ -5,6 +5,7 @@ using TradingCsvAnalyser.DataProviders;
 using TradingCsvAnalyser.Extensions.DataModels;
 using TradingCsvAnalyser.Models;
 using TradingCsvAnalyser.Models.AnalysisResults;
+using TradingCsvAnalyser.Models.AnalysisResults.FollowDayReport;
 using TradingCsvAnalyser.Models.HelperModels;
 using TradingCsvAnalyser.Models.HelperModels.FollowDayAnalysis;
 

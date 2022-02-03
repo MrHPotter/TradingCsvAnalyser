@@ -40,9 +40,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="DataProviders\Repositories" />
+      <Folder Include="Csv\Export" />
+      <Folder Include="Csv\Session" />
       <Folder Include="Models\QueryModels" />
-      <Folder Include="Providers" />
       <Folder Include="Tests" />
     </ItemGroup>
 

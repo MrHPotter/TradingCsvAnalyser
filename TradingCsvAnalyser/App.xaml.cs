@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TradingCsvAnalyser.Appilication;
 using TradingCsvAnalyser.Extensions;
 using TradingCsvAnalyser.Helpers;
+using TradingCsvAnalyser.Models.AnalysisResults;
 using TradingCsvAnalyser.Models.Database;
 using TradingCsvAnalyser.Windows;
 
@@ -36,11 +37,13 @@ namespace TradingCsvAnalyser
 
             Configuration = builder.Build();
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddTransient(typeof(Configuration), _ => Configuration);
+            serviceCollection.AddTransient(typeof(IConfiguration), _ => Configuration);
             serviceCollection.AddDbContext<AnalyserContext>(ServiceLifetime.Transient);
+            serviceCollection.AddDbContext<SessionContext>(ServiceLifetime.Transient);
             serviceCollection.ConfigureServices();
             ServiceProvider = serviceCollection.BuildServiceProvider();
-
+            ServiceProvider.GetRequiredService<SessionContext>().Database.EnsureCreated();
+            
             ConsoleHider.HideConsole();
             ServiceProvider.GetRequiredService<OverView>().Show();
             
